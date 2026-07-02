@@ -1,0 +1,12 @@
+{
+  "name": "dashcamargentina",
+  "version": "1.0.0",
+  "description": "DashCam Argentina - Cámaras vehiculares 4K",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx http-server . -p $PORT"
+  },
+  "keywords": ["dashcam", "argentina"],
+  "author": "",
+  "license": "ISC"
+}

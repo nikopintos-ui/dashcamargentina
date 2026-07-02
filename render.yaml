@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: dashcamargentina
+    env: node
+    plan: free
+    buildCommand: npm install http-server
+    startCommand: npx http-server . -p $PORT
+    routes:
+      - path: /
+        domain: dashcamargentina.com

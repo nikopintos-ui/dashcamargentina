@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="DashCam Argentina — Cámaras vehiculares 4K con visión nocturna y GPS. Para particulares y conductores de Uber, Cabify y DiDi.">
+<meta property="og:title" content="DashCam Argentina — Grabá cada viaje.">
+<meta property="og:description" content="Cámaras vehiculares 4K. Envíos a todo el país.">
+<meta property="og:url" content="https://dashcamargentina.com">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="favicon-32.png">
+<title>DashCam Argentina — Grabá cada viaje.</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --pr:#060C14;--ac:#1A6EE8;--acl:#4D9FFF;
+  --tx:#fff;--txd:#A8B8D0;--txdd:#4A5A70;
+  --bd:#1A2535;--rs:6px;
+}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--pr);color:var(--tx);overflow-x:hidden}
+
+/* ── NAV ───────────────────────────────── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 5%;height:64px;
+  background:rgba(6,12,20,.85);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(255,255,255,.06);
+  transition:background .3s;
+}
+.logo{text-decoration:none;display:flex;align-items:center}
+.nl{display:flex;gap:28px;list-style:none}
+.nl a{color:var(--txd);text-decoration:none;font-size:13px;font-weight:500;letter-spacing:.3px;transition:color .2s}
+.nl a:hover{color:#fff}
+.nav-cta{
+  background:var(--ac);color:#fff!important;
+  padding:8px 18px;border-radius:var(--rs);
+  font-weight:600!important;font-size:13px!important;
+  transition:background .2s!important;
+}
+.nav-cta:hover{background:var(--acl)!important}
+.ham{display:none;flex-direction:column;gap:5px;cursor:pointer}
+.ham span{width:22px;height:1.5px;background:var(--txd);border-radius:2px;transition:all .3s}
+.mob-menu{
+  display:none;flex-direction:column;
+  position:fixed;top:64px;left:0;right:0;
+  background:rgba(6,12,20,.97);backdrop-filter:blur(16px);
+  padding:20px 5% 28px;gap:0;border-bottom:1px solid var(--bd);
+  z-index:199;
+}
+.mob-menu a{
+  color:var(--txd);text-decoration:none;font-size:15px;
+  padding:14px 0;border-bottom:1px solid var(--bd);display:block;
+}
+.mob-menu a:last-child{border-bottom:none;color:#25D366;font-weight:700;margin-top:8px}
+
+/* ── HERO ──────────────────────────────── */
+.hero{
+  position:relative;min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  text-align:center;overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  /* Foto: autopista nocturna con light trails */
+  background-image:url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=1800&q=85');
+  background-size:cover;
+  background-position:center 60%;
+  filter:brightness(.42) saturate(1.15);
+}
+.hero-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(6,12,20,.3) 0%,rgba(6,12,20,.6) 60%,rgba(6,12,20,1) 100%);
+}
+.hero-content{position:relative;z-index:2;padding:0 5%;max-width:900px}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--ac);margin-bottom:28px;
+  padding:6px 16px;border:1px solid rgba(26,110,232,.4);border-radius:20px;
+  background:rgba(26,110,232,.1);
+}
+.hero-eyebrow span{width:6px;height:6px;border-radius:50%;background:#E02B2B;display:inline-block;animation:blink 1.4s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.hero h1{
+  font-size:clamp(44px,8vw,96px);
+  font-weight:800;line-height:1.02;
+  letter-spacing:-2px;
+  margin-bottom:24px;
+}
+.hero h1 em{font-style:normal;color:var(--acl)}
+.hero-sub{
+  font-size:clamp(16px,2vw,20px);
+  color:var(--txd);max-width:520px;margin:0 auto 44px;
+  font-weight:400;line-height:1.6;
+}
+.hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.btn-primary{
+  background:var(--ac);color:#fff;
+  padding:16px 36px;border-radius:var(--rs);
+  text-decoration:none;font-weight:700;font-size:15px;
+  transition:background .2s,transform .15s;letter-spacing:.2px;
+}
+.btn-primary:hover{background:var(--acl);transform:translateY(-2px)}
+.btn-ghost{
+  background:transparent;color:var(--txd);
+  padding:16px 36px;border-radius:var(--rs);
+  text-decoration:none;font-weight:600;font-size:15px;
+  border:1px solid rgba(255,255,255,.18);
+  transition:all .2s;
+}
+.btn-ghost:hover{border-color:rgba(255,255,255,.5);color:#fff}
+.hero-scroll{
+  position:absolute;bottom:36px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  color:var(--txdd);font-size:11px;letter-spacing:1px;text-transform:uppercase;
+  animation:float 2.5s ease-in-out infinite;
+}
+@keyframes float{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
+.hero-scroll svg{opacity:.4}
+
+/* ── TRUST BAR ─────────────────────────── */
+.trust{
+  display:flex;justify-content:center;gap:0;flex-wrap:wrap;
+  border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);
+  background:rgba(255,255,255,.02);
+}
+.trust-item{
+  display:flex;align-items:center;gap:10px;
+  padding:20px 32px;font-size:13px;font-weight:500;color:var(--txd);
+  border-right:1px solid var(--bd);flex:1;min-width:160px;justify-content:center;
+}
+.trust-item:last-child{border-right:none}
+.trust-item svg{color:var(--ac);flex-shrink:0}
+
+/* ── SECTIONS ──────────────────────────── */
+.section{padding:100px 5%}
+.section-dark{background:var(--pr)}
+.section-deeper{background:#03070D}
+
+.eyebrow{
+  font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--ac);margin-bottom:16px;display:block;
+}
+.section-title{
+  font-size:clamp(32px,5vw,56px);font-weight:800;
+  line-height:1.06;letter-spacing:-1.5px;margin-bottom:20px;
+}
+.section-sub{
+  font-size:17px;color:var(--txd);max-width:480px;line-height:1.7;
+}
+
+/* ── CINEMATIC SPLIT ───────────────────── */
+.split{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:0;align-items:center;min-height:560px;
+}
+.split-img{
+  height:560px;overflow:hidden;position:relative;
+}
+.split-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.split:hover .split-img img{transform:scale(1.03)}
+.split-img-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(6,12,20,0) 60%,rgba(6,12,20,1) 100%);
+}
+.split-img-overlay.left{
+  background:linear-gradient(270deg,rgba(6,12,20,0) 60%,rgba(6,12,20,1) 100%);
+}
+.split-text{padding:60px 64px}
+.split-text .section-sub{margin-bottom:36px}
+.split-pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:36px}
+.split-pill{
+  padding:5px 12px;border-radius:4px;font-size:11px;font-weight:700;
+  background:rgba(26,110,232,.15);color:var(--acl);
+  border:1px solid rgba(26,110,232,.3);
+}
+
+/* ── PRODUCTS ──────────────────────────── */
+.prod-header{text-align:center;margin-bottom:60px}
+.prod-header .section-sub{margin:0 auto}
+.filters{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-bottom:48px}
+.filt{
+  padding:8px 20px;border-radius:20px;font-size:12px;font-weight:600;
+  background:transparent;color:var(--txd);
+  border:1px solid var(--bd);cursor:pointer;transition:all .2s;letter-spacing:.3px;
+}
+.filt:hover,.filt.active{background:var(--ac);color:#fff;border-color:var(--ac)}
+.prod-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+  gap:2px;max-width:1400px;margin:0 auto;
+}
+.prod-card{
+  background:#080F18;cursor:pointer;
+  transition:background .25s;overflow:hidden;position:relative;
+  display:flex;flex-direction:column;
+}
+.prod-card:hover{background:#0D1620}
+.prod-img{
+  height:240px;overflow:hidden;position:relative;
+  background:#0A1020;
+  display:flex;align-items:center;justify-content:center;
+}
+.prod-img img{
+  max-width:100%;max-height:100%;width:auto;height:auto;
+  object-fit:contain;
+  transition:transform .5s ease;padding:8px;
+}
+.prod-card:hover .prod-img img{transform:scale(1.04)}
+.prod-badge{
+  position:absolute;top:14px;left:14px;
+  padding:4px 10px;border-radius:4px;font-size:10px;font-weight:800;
+  letter-spacing:.8px;text-transform:uppercase;z-index:2;
+}
+.b-stock{background:#0D9F6E;color:#fff}
+.b-mid{background:var(--ac);color:#fff}
+.b-prem{background:#7C3AED;color:#fff}
+.b-prestige{background:linear-gradient(135deg,#1A1A1A,#2A2A2A);color:#C0A060;border:1px solid #C0A06050}
+.b-mid2{background:#0D9F6E;color:#fff}
+.prod-avail{
+  display:flex;align-items:center;gap:7px;
+  padding:10px 20px;font-size:11px;font-weight:600;
+  border-bottom:1px solid var(--bd);
+}
+.prod-avail.stock{color:#0D9F6E}
+.prod-avail.pedido{color:#F59E0B}
+.avail-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.stock .avail-dot{background:#0D9F6E}
+.pedido .avail-dot{background:#F59E0B}
+.prod-body{padding:22px 24px 28px;flex:1;display:flex;flex-direction:column}
+.prod-cat{font-size:10px;font-weight:700;color:var(--ac);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px}
+.prod-name{font-size:20px;font-weight:800;letter-spacing:-.3px;margin-bottom:8px;line-height:1.2}
+.prod-desc{font-size:13px;color:var(--txd);line-height:1.7;margin-bottom:18px;flex:1}
+.prod-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:20px}
+.prod-tag{
+  padding:3px 8px;border-radius:3px;font-size:10px;
+  background:rgba(255,255,255,.05);color:var(--txd);
+  border:1px solid rgba(255,255,255,.08);
+}
+.prod-footer{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  border-top:1px solid var(--bd);padding-top:18px;gap:12px;
+}
+.prod-price{display:flex;flex-direction:column}
+.prod-price-main{font-size:24px;font-weight:800;line-height:1}
+.prod-price-usd{font-size:11px;color:var(--txdd);margin-top:3px}
+.prod-wa{
+  background:#25D366;color:#fff;
+  padding:11px 18px;border-radius:var(--rs);
+  text-decoration:none;font-size:12px;font-weight:700;
+  display:flex;align-items:center;gap:6px;
+  transition:background .2s,transform .15s;white-space:nowrap;
+}
+.prod-wa:hover{background:#1EBE57;transform:translateY(-1px)}
+.prod-more{
+  margin-top:12px;width:100%;padding:10px;
+  border:1px solid var(--bd);border-radius:var(--rs);
+  background:transparent;color:var(--ac);font-size:12px;font-weight:600;
+  cursor:pointer;transition:all .2s;letter-spacing:.3px;
+}
+.prod-more:hover{background:var(--ac);color:#fff;border-color:var(--ac)}
+
+/* ── FEATURE GRID ──────────────────────── */
+.feat-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:2px;max-width:1200px;margin:0 auto;
+}
+.feat-card{
+  background:#080F18;padding:40px 36px;
+  transition:background .2s;
+}
+.feat-card:hover{background:#0D1620}
+.feat-icon{
+  width:48px;height:48px;border-radius:10px;
+  background:rgba(26,110,232,.15);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:20px;
+}
+.feat-card h3{font-size:18px;font-weight:700;margin-bottom:10px;letter-spacing:-.2px}
+.feat-card p{font-size:13px;color:var(--txd);line-height:1.7}
+
+/* ── RIDESHARE SECTION ─────────────────── */
+.rs-wrap{max-width:900px;margin:0 auto;text-align:center}
+.rs-tabs{
+  display:flex;justify-content:center;
+  border:1px solid var(--bd);border-radius:8px;
+  overflow:hidden;max-width:440px;margin:36px auto;
+}
+.rs-tab{
+  flex:1;padding:12px 8px;font-size:13px;font-weight:600;
+  cursor:pointer;transition:all .2s;color:var(--txd);
+  background:transparent;border:none;
+}
+.rs-tab.active{background:var(--ac);color:#fff}
+.rs-tab:hover:not(.active){background:rgba(255,255,255,.05);color:#fff}
+.rs-content{display:none}
+.rs-content.active{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;max-width:860px;margin:0 auto}
+.rs-card{
+  background:#080F18;border:1px solid var(--bd);
+  border-radius:8px;padding:24px;text-align:left;
+  transition:background .2s;
+}
+.rs-card:hover{background:#0D1620}
+.rs-icon{width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.ic-r{background:rgba(224,43,43,.15)}
+.ic-a{background:rgba(245,158,11,.15)}
+.ic-b{background:rgba(26,110,232,.15)}
+.ic-g{background:rgba(13,159,110,.15)}
+.rs-card h3{font-size:14px;font-weight:700;margin-bottom:6px}
+.rs-card p{font-size:12px;color:var(--txd);line-height:1.6}
+.stats{
+  display:flex;flex-wrap:wrap;justify-content:center;
+  gap:0;border:1px solid var(--bd);border-radius:8px;
+  overflow:hidden;margin-top:40px;max-width:860px;margin-left:auto;margin-right:auto;
+}
+.stat{
+  flex:1;min-width:160px;text-align:center;
+  padding:28px 20px;border-right:1px solid var(--bd);
+  background:#080F18;
+}
+.stat:last-child{border-right:none}
+.stat-n{font-size:36px;font-weight:800;color:var(--acl);line-height:1;letter-spacing:-1px}
+.stat-l{font-size:11px;color:var(--txd);margin-top:6px;line-height:1.5}
+
+/* ── FAQ ───────────────────────────────── */
+.faq-list{max-width:700px;margin:0 auto}
+.faq-item{border-bottom:1px solid var(--bd);padding:22px 0;cursor:pointer}
+.faq-item:last-child{border-bottom:none}
+.faq-q{
+  font-size:16px;font-weight:600;letter-spacing:-.1px;
+  display:flex;justify-content:space-between;align-items:center;gap:16px;
+}
+.faq-q::after{content:'+';font-size:20px;color:var(--ac);font-weight:300;flex-shrink:0;transition:transform .3s}
+.faq-item.open .faq-q::after{transform:rotate(45deg)}
+.faq-a{font-size:14px;color:var(--txd);line-height:1.75;max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s}
+.faq-item.open .faq-a{max-height:200px;padding-top:14px}
+
+/* ── CTA BANNER ────────────────────────── */
+.cta-banner{
+  position:relative;overflow:hidden;
+  background:linear-gradient(135deg,#0A1628 0%,#0D1F3C 50%,#0A1628 100%);
+  padding:100px 5%;text-align:center;
+}
+.cta-banner::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(26,110,232,.18) 0%,transparent 70%);
+}
+.cta-banner>*{position:relative;z-index:1}
+.cta-banner h2{font-size:clamp(32px,5vw,56px);font-weight:800;letter-spacing:-1.5px;margin-bottom:16px}
+.cta-banner p{font-size:17px;color:var(--txd);margin-bottom:40px}
+
+/* ── FOOTER ────────────────────────────── */
+footer{
+  background:#03070D;
+  border-top:1px solid var(--bd);
+  padding:60px 5% 28px;
+}
+.foot-top{
+  display:grid;grid-template-columns:2fr 1fr 1fr 1fr;
+  gap:40px;padding-bottom:40px;
+  border-bottom:1px solid var(--bd);
+}
+.foot-brand p{color:var(--txd);font-size:13px;max-width:240px;margin-top:14px;line-height:1.7}
+.foot-col h4{
+  font-size:11px;font-weight:700;letter-spacing:2px;
+  text-transform:uppercase;color:var(--txdd);margin-bottom:16px;
+}
+.foot-col ul{list-style:none}
+.foot-col li{margin-bottom:10px}
+.foot-col a{color:var(--txd);text-decoration:none;font-size:13px;transition:color .2s}
+.foot-col a:hover{color:#fff}
+.foot-bot{
+  padding-top:24px;display:flex;
+  justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;
+}
+.foot-bot p{color:var(--txdd);font-size:12px}
+
+/* ── WA FLOAT ──────────────────────────── */
+.waf{
+  position:fixed;bottom:28px;right:28px;
+  width:54px;height:54px;background:#25D366;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 20px rgba(37,211,102,.4);
+  text-decoration:none;z-index:999;transition:transform .2s;
+}
+.waf:hover{transform:scale(1.1)}
+
+/* ── MODAL ─────────────────────────────── */
+.modal-overlay{
+  display:none;position:fixed;inset:0;
+  background:rgba(3,7,13,.9);backdrop-filter:blur(8px);
+  z-index:2000;overflow-y:auto;padding:32px 16px;
+}
+.modal-box{
+  background:#080F18;border:1px solid var(--bd);
+  border-radius:12px;max-width:720px;margin:0 auto;
+  overflow:hidden;position:relative;
+}
+.modal-close{
+  position:absolute;top:14px;right:14px;
+  width:32px;height:32px;border-radius:50%;border:1px solid var(--bd);
+  background:rgba(255,255,255,.05);cursor:pointer;
+  color:var(--txd);font-size:18px;z-index:10;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .2s;
+}
+.modal-close:hover{background:rgba(255,255,255,.12);color:#fff}
+.modal-gal{
+  position:relative;background:#0A1020;height:320px;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+}
+.modal-gal img{max-width:100%;max-height:320px;width:auto;height:auto;
+  object-fit:contain;display:none;padding:12px;}
+.modal-gal img.active{display:block}
+.gal-prev,.gal-next{
+  position:absolute;top:50%;transform:translateY(-50%);
+  background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.1);
+  color:#fff;width:36px;height:36px;border-radius:50%;cursor:pointer;
+  font-size:18px;display:flex;align-items:center;justify-content:center;
+  transition:background .2s;z-index:2;
+}
+.gal-prev{left:12px}.gal-next{right:12px}
+.gal-prev:hover,.gal-next:hover{background:rgba(0,0,0,.9)}
+.gal-dots{
+  position:absolute;bottom:12px;left:50%;transform:translateX(-50%);
+  display:flex;gap:6px;
+}
+.gal-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:rgba(255,255,255,.3);cursor:pointer;transition:background .2s;
+}
+.gal-dot.active{background:#fff}
+.modal-body{padding:28px 32px 32px}
+.modal-avail{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:4px 12px;border-radius:20px;font-size:11px;font-weight:700;margin-bottom:14px;
+}
+.modal-avail.stock{background:rgba(13,159,110,.15);color:#0D9F6E;border:1px solid rgba(13,159,110,.3)}
+.modal-avail.pedido{background:rgba(245,158,11,.12);color:#F59E0B;border:1px solid rgba(245,158,11,.25)}
+.modal-avail-dot{width:5px;height:5px;border-radius:50%}
+.modal-avail.stock .modal-avail-dot{background:#0D9F6E}
+.modal-avail.pedido .modal-avail-dot{background:#F59E0B}
+.modal-cat{font-size:10px;font-weight:700;color:var(--ac);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:5px}
+.modal-name{font-size:26px;font-weight:800;letter-spacing:-.5px;margin-bottom:10px}
+.modal-desc{font-size:14px;color:var(--txd);line-height:1.75;margin-bottom:24px}
+.modal-cols{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:20px}
+.modal-sec-title{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--txdd);margin-bottom:12px}
+.spec-row,.ideal-row{font-size:13px;color:var(--txd);margin-bottom:7px;display:flex;align-items:flex-start;gap:8px;line-height:1.5}
+.spec-row::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--ac);flex-shrink:0;margin-top:7px}
+.ideal-row::before{content:'✓';color:#0D9F6E;font-weight:700;flex-shrink:0}
+.modal-includes{
+  background:rgba(255,255,255,.03);border:1px solid var(--bd);
+  border-radius:6px;padding:14px 16px;margin-bottom:24px;
+  font-size:13px;color:var(--txd);line-height:1.8;
+}
+.modal-foot{
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:16px;
+  padding-top:20px;border-top:1px solid var(--bd);
+}
+.modal-price-big{font-size:32px;font-weight:800;letter-spacing:-1px;line-height:1}
+.modal-usd{font-size:12px;color:var(--txdd);margin-top:4px}
+.modal-wa-btn{
+  background:#25D366;color:#fff;
+  padding:14px 24px;border-radius:var(--rs);
+  text-decoration:none;font-size:14px;font-weight:700;
+  display:flex;align-items:center;gap:8px;transition:background .2s;
+}
+.modal-wa-btn:hover{background:#1EBE57}
+
+/* ── RESPONSIVE ────────────────────────── */
+@media(max-width:900px){
+  .split{grid-template-columns:1fr}
+  .split-img{height:340px}
+  .split-img-overlay,.split-img-overlay.left{display:none}
+  .split-text{padding:40px 32px}
+  .foot-top{grid-template-columns:1fr 1fr}
+  .modal-cols{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  .nl{display:none}.ham{display:flex}
+  .hero-bg{grid-template-columns:1fr}
+  .hero-bg div:nth-child(2),.hero-bg div:nth-child(3){display:none}
+  .trust-item{min-width:130px;padding:16px 18px;font-size:12px}
+  .prod-grid{grid-template-columns:1fr}
+  .feat-grid{grid-template-columns:1fr}
+  .stats{flex-direction:column}
+  .stat{border-right:none;border-bottom:1px solid var(--bd)}
+  .stat:last-child{border-bottom:none}
+  .foot-top{grid-template-columns:1fr}
+  .modal-body{padding:20px}
+  .modal-name{font-size:20px}
+}
+</style>
+</head>
+<body>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal" onclick="handleOverlayClick(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div class="modal-gal" id="modal-gal">
+      <button class="gal-prev" onclick="gallNav(-1,event)">‹</button>
+      <button class="gal-next" onclick="gallNav(1,event)">›</button>
+      <div class="gal-dots" id="gal-dots"></div>
+    </div>
+    <div class="modal-body">
+      <div class="modal-avail" id="m-avail"><span class="modal-avail-dot"></span><span id="m-avail-txt"></span></div>
+      <div class="modal-cat" id="m-cat"></div>
+      <div class="modal-name" id="m-name"></div>
+      <div class="modal-desc" id="m-desc"></div>
+      <div class="modal-cols">
+        <div><div class="modal-sec-title">Especificaciones</div><div id="m-specs"></div></div>
+        <div><div class="modal-sec-title">Ideal para</div><div id="m-ideal"></div></div>
+      </div>
+      <div class="modal-includes" id="m-inc"></div>
+      <div class="modal-foot">
+        <div><div class="modal-price-big" id="m-price"></div><div class="modal-usd" id="m-usd"></div></div>
+        <a class="modal-wa-btn" id="m-wa" href="#" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Consultar por WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="/">
+    <svg width="148" height="36" viewBox="0 0 160 40" fill="none">
+      <rect x="0" y="6" width="36" height="26" rx="5" fill="#1A6EE8"/>
+      <rect x="36" y="11" width="7" height="16" rx="2" fill="#1A6EE8"/>
+      <circle cx="18" cy="19" r="7" fill="#060C14" stroke="#fff" stroke-width="1.5"/>
+      <circle cx="18" cy="19" r="3.5" fill="#060C14"/>
+      <circle cx="18" cy="19" r="1.5" fill="#1A6EE8"/>
+      <circle cx="30" cy="9" r="4" fill="#E02B2B"/>
+      <circle cx="30" cy="9" r="2" fill="#fff"/>
+      <text x="50" y="17" font-family="-apple-system,sans-serif" font-size="13" font-weight="700" fill="#ffffff" letter-spacing=".3">DASHCAM</text>
+      <text x="50" y="31" font-family="-apple-system,sans-serif" font-size="11" font-weight="400" fill="#7B9BC8" letter-spacing="2">ARGENTINA</text>
+    </svg>
+  </a>
+  <ul class="nl">
+    <li><a href="#rideshare">Conductores</a></li>
+    <li><a href="#productos">Productos</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="https://wa.me/5491156334969" target="_blank" rel="noopener" class="nav-cta">Consultar →</a></li>
+  </ul>
+  <div class="ham" id="ham" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+<div class="mob-menu" id="mob-menu">
+  <a href="#rideshare" onclick="toggleMenu()">Conductores</a>
+  <a href="#productos" onclick="toggleMenu()">Productos</a>
+  <a href="#faq" onclick="toggleMenu()">FAQ</a>
+  <a href="https://wa.me/5491156334969" target="_blank" rel="noopener" onclick="toggleMenu()">Consultar por WhatsApp →</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <span></span> Grabando ahora mismo
+    </div>
+    <h1>Grabá cada viaje.<br><em>Protegé tu auto.</em></h1>
+    <p class="hero-sub">Cámaras vehiculares 4K con visión nocturna, GPS y sensor G. Para particulares y conductores de Uber, Cabify y DiDi.</p>
+    <div class="hero-btns">
+      <a href="#productos" class="btn-primary">Ver cámaras</a>
+      <a href="https://wa.me/5491156334969" target="_blank" rel="noopener" class="btn-ghost">Consultar →</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg>
+    Scroll
+  </div>
+</section>
+
+<!-- TRUST -->
+<div class="trust">
+  <div class="trust-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Garantía 12 meses</div>
+  <div class="trust-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>Envío a todo el país</div>
+  <div class="trust-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.34 12a19.79 19.79 0 01-3.07-8.67A2 2 0 013.25 1.25h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.91 9.91a16 16 0 006.06 6.06l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>Soporte WhatsApp</div>
+  <div class="trust-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/></svg>Accesorios incluidos</div>
+</div>
+
+<!-- CINEMATIC: Conductores de plataformas -->
+<section class="section section-deeper" id="rideshare">
+  <div style="max-width:1200px;margin:0 auto">
+    <div class="split">
+      <div class="split-img">
+        <img src="split_historial.png" alt="Dashcam instalada en auto en ruta">
+        <div class="split-img-overlay left"></div>
+      </div>
+      <div class="split-text">
+        <span class="eyebrow">Para conductores</span>
+        <h2 class="section-title">Tu historial.<br>Tu defensa.</h2>
+        <p class="section-sub">Uber, Cabify y DiDi no te protegen ante acusaciones falsas. Una cámara sí. El video es evidencia irrefutable en cualquier disputa.</p>
+        <div class="split-pills">
+          <span class="split-pill">● Uber</span>
+          <span class="split-pill">● Cabify</span>
+          <span class="split-pill">● DiDi</span>
+        </div>
+        <div class="rs-tabs">
+          <button class="rs-tab active" onclick="showRS('owner',this)">🚗 Dueño</button>
+          <button class="rs-tab" onclick="showRS('driver',this)">👤 Conductor</button>
+          <button class="rs-tab" onclick="showRS('pass',this)">🧍 Pasajero</button>
+        </div>
+      </div>
+    </div>
+    <div class="rs-content active" id="rs-owner">
+      <div class="rs-card"><div class="rs-icon ic-r"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E02B2B" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><h3>Control total</h3><p>Sabés dónde está tu auto, a qué velocidad va y qué pasó en cada viaje.</p></div>
+      <div class="rs-card"><div class="rs-icon ic-a"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><h3>Daños documentados</h3><p>Video con fecha y hora de cualquier daño. Ningún conductor puede negarlo.</p></div>
+      <div class="rs-card"><div class="rs-icon ic-b"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A6EE8" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h3>Prueba ante seguros</h3><p>Evidencia irrefutable. Muchas aseguradoras reducen la franquicia con cámara.</p></div>
+    </div>
+    <div class="rs-content" id="rs-driver">
+      <div class="rs-card"><div class="rs-icon ic-r"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E02B2B" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><h3>Acusaciones falsas</h3><p>El video interior prueba exactamente qué pasó. Sin interpretaciones.</p></div>
+      <div class="rs-card"><div class="rs-icon ic-a"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div><h3>Robos y asaltos</h3><p>Todo queda registrado. Video, hora, ubicación GPS.</p></div>
+      <div class="rs-card"><div class="rs-icon ic-g"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0D9F6E" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><h3>Mejor rating</h3><p>Saber que todo se graba mejora el clima del viaje. Mejores calificaciones.</p></div>
+    </div>
+    <div class="rs-content" id="rs-pass">
+      <div class="rs-card"><div class="rs-icon ic-g"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0D9F6E" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h3>Viaje verificado</h3><p>Cámara visible = viaje documentado. Transparencia total.</p></div>
+      <div class="rs-card"><div class="rs-icon ic-b"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1A6EE8" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div><h3>Ruta exacta</h3><p>GPS registra el trayecto completo. Ningún desvío pasa sin evidencia.</p></div>
+      <div class="rs-card"><div class="rs-icon ic-a"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><h3>Objetos olvidados</h3><p>El video prueba que el objeto estaba en el auto durante el viaje.</p></div>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="stat-n">+38%</div><div class="stat-l">de conductores reportan un incidente en el primer año</div></div>
+      <div class="stat"><div class="stat-n">9 de 10</div><div class="stat-l">disputas se resuelven a favor del conductor con video</div></div>
+      <div class="stat"><div class="stat-n">24 hs</div><div class="stat-l">es lo que tarda una plataforma en inhabilitar sin pruebas</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTOS -->
+<section class="section section-dark" id="productos">
+  <div class="prod-header">
+    <span class="eyebrow">Catálogo completo</span>
+    <h2 class="section-title">Todas las cámaras</h2>
+    <p class="section-sub">Desde la entrada perfecta para plataformas hasta la top de gama para autos premium.</p>
+  </div>
+  <div class="filters">
+    <button class="filt active" onclick="fp('all',this)">Todos</button>
+    <button class="filt" onclick="fp('stock',this)">En stock</button>
+    <button class="filt" onclick="fp('entry',this)">Entrada</button>
+    <button class="filt" onclick="fp('mid',this)">Gama media</button>
+    <button class="filt" onclick="fp('premium',this)">Premium</button>
+  </div>
+  <div class="prod-grid" id="prod-grid">
+
+    <!-- 1. DashCam 3 Canales — EN STOCK -->
+    <div class="prod-card" data-cat="entry" data-avail="stock" onclick="openModal(0)">
+      <div class="prod-img">
+        <span class="prod-badge b-stock">En stock</span>
+        <img src="cam1_main.png" alt="DashCam 3 Canales 1080P">
+      </div>
+      <div class="prod-avail stock"><span class="avail-dot"></span>En stock · Envío inmediato</div>
+      <div class="prod-body">
+        <div class="prod-cat">Dual · 3 canales</div>
+        <div class="prod-name">DashCam 3 Canales 1080P</div>
+        <div class="prod-desc">Grabación simultánea en frontal 170°, interior 180° y trasera. Wi-Fi para descargar videos desde el celular, Sensor G y visión nocturna infrarroja.</div>
+        <div class="prod-tags"><span class="prod-tag">FHD 1080P</span><span class="prod-tag">3 cámaras</span><span class="prod-tag">Wi-Fi</span><span class="prod-tag">Sensor G</span><span class="prod-tag">Noche</span></div>
+        <div class="prod-footer">
+          <div class="prod-price"><div class="prod-price-main">$89.999</div><div class="prod-price-usd">≈ USD 75</div></div>
+          <a href="https://wa.me/5491156334969?text=Hola,%20me%20interesa%20la%20DashCam%203%20Canales%201080P" class="prod-wa" onclick="event.stopPropagation()" target="_blank" rel="noopener"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Consultar</a>
+        </div>
+        <button class="prod-more" onclick="event.stopPropagation();openModal(0)">Ver especificaciones →</button>
+      </div>
+    </div>
+
+    <!-- 2. 70mai A510 -->
+    <div class="prod-card" data-cat="mid" data-avail="pedido" onclick="openModal(1)">
+      <div class="prod-img">
+        <span class="prod-badge b-mid">A pedido</span>
+        <img src="70maiA510.png" alt="70mai A510">
+      </div>
+      <div class="prod-avail pedido"><span class="avail-dot"></span>Bajo pedido · 10–15 días</div>
+      <div class="prod-body">
+        <div class="prod-cat">Gama media · 70mai (Xiaomi)</div>
+        <div class="prod-name">70mai A510</div>
+        <div class="prod-desc">Doble cámara 2K de la línea 70mai de Xiaomi. Grabación delantera y trasera de alta resolución con GPS integrado y modo estacionamiento 24/7.</div>
+        <div class="prod-tags"><span class="prod-tag">2K QHD</span><span class="prod-tag">Doble cámara</span><span class="prod-tag">GPS</span><span class="prod-tag">Parking 24/7</span><span class="prod-tag">Xiaomi</span></div>
+        <div class="prod-footer">
+          <div class="prod-price"><div class="prod-price-main">$210.000</div><div class="prod-price-usd">≈ USD 175</div></div>
+          <a href="https://wa.me/5491156334969?text=Hola,%20me%20interesa%20la%2070mai%20A510" class="prod-wa" onclick="event.stopPropagation()" target="_blank" rel="noopener"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Consultar</a>
+        </div>
+        <button class="prod-more" onclick="event.stopPropagation();openModal(1)">Ver especificaciones →</button>
+      </div>
+    </div>
+
+    <!-- 3. Azdome M550 -->
+    <div class="prod-card" data-cat="mid" data-avail="pedido" onclick="openModal(2)">
+      <div class="prod-img">
+        <span class="prod-badge b-mid">A pedido</span>
+        <img src="azdomeM550.png" alt="Azdome M550">
+      </div>
+      <div class="prod-avail pedido"><span class="avail-dot"></span>Bajo pedido · 10–15 días</div>
+      <div class="prod-body">
+        <div class="prod-cat">Gama media · Todo incluido</div>
+        <div class="prod-name">Azdome M550</div>
+        <div class="prod-desc">Triple cámara con lente frontal 4K, interior y trasera Full HD. Wi-Fi, GPS y app móvil incluidos. Graba los tres ángulos del auto al mismo tiempo.</div>
+        <div class="prod-tags"><span class="prod-tag">4K frontal</span><span class="prod-tag">3 cámaras</span><span class="prod-tag">Wi-Fi</span><span class="prod-tag">GPS</span><span class="prod-tag">App</span></div>
+        <div class="prod-footer">
+          <div class="prod-price"><div class="prod-price-main">$155.000</div><div class="prod-price-usd">≈ USD 130</div></div>
+          <a href="https://wa.me/5491156334969?text=Hola,%20me%20interesa%20la%20Azdome%20M550" class="prod-wa" onclick="event.stopPropagation()" target="_blank" rel="noopener"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Consultar</a>
+        </div>
+        <button class="prod-more" onclick="event.stopPropagation();openModal(2)">Ver especificaciones →</button>
+      </div>
+    </div>
+
+    <!-- 4. Viofo A119 Mini 2 -->
+    <div class="prod-card" data-cat="mid" data-avail="pedido" onclick="openModal(3)">
+      <div class="prod-img">
+        <span class="prod-badge b-mid">A pedido</span>
+        <img src="viofoA119Mini2.png" alt="Viofo A119 Mini 2">
+      </div>
+      <div class="prod-avail pedido"><span class="avail-dot"></span>Bajo pedido · 10–15 días</div>
+      <div class="prod-body">
+        <div class="prod-cat">Frontal · Sony STARVIS 2</div>
+        <div class="prod-name">Viofo A119 Mini 2</div>
+        <div class="prod-desc">Sensor Sony STARVIS 2 con grabación 2K a 60fps. Diseño ultracompacto que se instala detrás del espejo. Visión nocturna excepcional gracias a su apertura f/1.8.</div>
+        <div class="prod-tags"><span class="prod-tag">Sony STARVIS 2</span><span class="prod-tag">2K 60fps</span><span class="prod-tag">Ultra compact</span><span class="prod-tag">GPS</span></div>
+        <div class="prod-footer">
+          <div class="prod-price"><div class="prod-price-main">$185.000</div><div class="prod-price-usd">≈ USD 155</div></div>
+          <a href="https://wa.me/5491156334969?text=Hola,%20me%20interesa%20la%20Viofo%20A119%20Mini%202" class="prod-wa" onclick="event.stopPropagation()" target="_blank" rel="noopener"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Consultar</a>
+        </div>
+        <button class="prod-more" onclick="event.stopPropagation();openModal(3)">Ver especificaciones →</button>
+      </div>
+    </div>
+
+    <!-- 5. Viofo A229 Plus 2CH -->
+    <div class="prod-card" data-cat="premium" data-avail="pedido" onclick="openModal(4)">
+      <div class="prod-img">
+        <span class="prod-badge b-prem">Premium</span>
+        <img src="viofoA229Plus2CH.png" alt="Viofo A229 Plus 2CH">
+      </div>
+      <div class="prod-avail pedido"><span class="avail-dot"></span>Bajo pedido · 15–20 días</div>
+      <div class="prod-body">
+        <div class="prod-cat">Doble cámara · Sony STARVIS 2</div>
+        <div class="prod-name">Viofo A229 Plus 2CH</div>
+        <div class="prod-desc">Doble sensor Sony STARVIS 2 en frontal y trasera, ambos en 2K. Wi-Fi 5GHz para transferir videos en segundos. GPS, control por voz y modo parking avanzado.</div>
+        <div class="prod-tags"><span class="prod-tag">Sony STARVIS 2 ×2</span><span class="prod-tag">2K+2K</span><span class="prod-tag">Wi-Fi 5GHz</span><span class="prod-tag">Voz</span></div>
+        <div class="prod-footer">
+          <div class="prod-price"><div class="prod-price-main">$370.000</div><div class="prod-price-usd">≈ USD 310</div></div>
+          <a href="https://wa.me/5491156334969?text=Hola,%20me%20interesa%20la%20Viofo%20A229%20Plus%202CH" class="prod-wa" onclick="event.stopPropagation()" target="_blank" rel="noopener"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Consultar</a>
+        </div>
+        <button class="prod-more" onclick="event.stopPropagation();openModal(4)">Ver especificaciones →</button>
+      </div>
+    </div>
+
+    <!-- 6. 70mai A810 -->
+    <div class="prod-card" data-cat="premium" data-avail="pedido" onclick="openModal(5)">
+      <div class="prod-img">
+        <span class="prod-badge b-prem">Premium</span>
+        <img src="70maiA810.png" alt="70mai A810">
+      </div>
+      <div class="prod-avail pedido"><span class="avail-dot"></span>Bajo pedido · 15–20 días</div>
+      <div class="prod-body">
+        <div class="prod-cat">Premium · 70mai (Xiaomi)</div>
+        <div class="prod-name">70mai A810</div>
+        <div class="prod-desc">Grabación 4K con sensor Sony STARVIS 2 y alertas ADAS integradas. GPS, parking 24/7 y app oficial 70mai. Todo en un diseño compacto fácil de instalar.</div>
+        <div class="prod-tags"><span class="prod-tag">4K Sony STARVIS 2</span><span class="prod-tag">ADAS</span><span class="prod-tag">GPS</span><span class="prod-tag">Parking 24/7</span></div>
+        <div class="prod-footer">
+          <div class="prod-price"><div class="prod-price-main">$260.000</div><div class="prod-price-usd">≈ USD 215</div></div>
+          <a href="https://wa.me/5491156334969?text=Hola,%20me%20interesa%20la%2070mai%20A810" class="prod-wa" onclick="event.stopPropagation()" target="_blank" rel="noopener"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Consultar</a>
+        </div>
+        <button class="prod-more" onclick="event.stopPropagation();openModal(5)">Ver especificaciones →</button>
+      </div>
+    </div>
+
+    <!-- 7. BlackVue DR770X -->
+    <div class="prod-card" data-cat="premium" data-avail="pedido" onclick="openModal(6)">
+      <div class="prod-img">
+        <span class="prod-badge b-prestige">Prestige</span>
+        <img src="BlackVue_DR770x-2ch.png" alt="BlackVue DR770X-2CH">
+      </div>
+      <div class="prod-avail pedido"><span class="avail-dot"></span>Bajo pedido · 15–20 días</div>
+      <div class="prod-body">
+        <div class="prod-cat">Prestige · Cloud · Full HD</div>
+        <div class="prod-name">BlackVue DR770X-2CH</div>
+        <div class="prod-desc">Doble cámara Full HD con conectividad cloud para ver grabaciones en tiempo real desde cualquier lugar. Diseño cilindro discreto y app BlackVue con gestión avanzada.</div>
+        <div class="prod-tags"><span class="prod-tag">Full HD doble</span><span class="prod-tag">Cloud</span><span class="prod-tag">App premium</span><span class="prod-tag">Parking</span></div>
+        <div class="prod-footer">
+          <div class="prod-price"><div class="prod-price-main">$540.000</div><div class="prod-price-usd">≈ USD 450</div></div>
+          <a href="https://wa.me/5491156334969?text=Hola,%20me%20interesa%20la%20BlackVue%20DR770X-2CH" class="prod-wa" onclick="event.stopPropagation()" target="_blank" rel="noopener"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Consultar</a>
+        </div>
+        <button class="prod-more" onclick="event.stopPropagation();openModal(6)">Ver especificaciones →</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section section-deeper">
+  <div style="max-width:1200px;margin:0 auto">
+    <div style="text-align:center;margin-bottom:60px">
+      <span class="eyebrow">Por qué elegirnos</span>
+      <h2 class="section-title">Solo vendemos dashcams.</h2>
+    </div>
+    <div class="feat-grid">
+      <div class="feat-card"><div class="feat-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1A6EE8" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h3>Garantía 12 meses</h3><p>Garantía directa en todos los productos. Si hay un problema, lo resolvemos.</p></div>
+      <div class="feat-card"><div class="feat-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1A6EE8" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div><h3>Curado con criterio</h3><p>Solo modelos que usaríamos en nuestros propios autos. Sin relleno.</p></div>
+      <div class="feat-card"><div class="feat-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1A6EE8" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.34 12a19.79 19.79 0 01-3.07-8.67A2 2 0 013.25 1.25h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.91 9.91a16 16 0 006.06 6.06l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></div><h3>Asesoramiento real</h3><p>Te decimos qué modelo necesitás. Sin venderte de más.</p></div>
+      <div class="feat-card"><div class="feat-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1A6EE8" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div><h3>Envío a todo el país</h3><p>Despachamos a cualquier provincia con seguimiento en tiempo real.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<div class="cta-banner">
+  <span class="eyebrow">Empezá ahora</span>
+  <h2>¿No sabés qué modelo elegir?</h2>
+  <p>Contanos tu caso por WhatsApp y te recomendamos la cámara ideal en minutos.</p>
+  <a href="https://wa.me/5491156334969?text=Hola,%20necesito%20ayuda%20para%20elegir%20una%20dashcam" class="btn-primary" target="_blank" rel="noopener">Consultar gratis →</a>
+</div>
+
+<!-- FAQ -->
+<section class="section section-darker" id="faq" style="background:#03070D">
+  <div style="max-width:700px;margin:0 auto;text-align:center;margin-bottom:52px">
+    <span class="eyebrow">Dudas frecuentes</span>
+    <h2 class="section-title">FAQ</h2>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">¿Qué diferencia hay entre en stock y bajo pedido?</div>
+      <div class="faq-a">Los en stock los tenemos físicamente y despachamos el mismo día. Los bajo pedido se importan especialmente para vos y tardan entre 10 y 20 días según el modelo.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">¿Qué cámara me recomendás para Uber, Cabify o DiDi?</div>
+      <div class="faq-a">La DashCam 3 Canales para empezar rápido (en stock). La Azdome M550 si querés 4K. Ambas graban frontal + interior + trasera simultáneamente, que es clave para protegerte ante denuncias.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">¿Qué es el Sensor G?</div>
+      <div class="faq-a">Detecta impactos y frenadas bruscas, y bloquea automáticamente ese clip para que no sea sobreescrito. En caso de choque, la evidencia queda protegida sin que tengas que hacer nada.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">¿Las cámaras incluyen tarjeta de memoria?</div>
+      <div class="faq-a">No están incluidas. Te recomendamos la capacidad ideal para cada modelo y podés pedirla junto con la cámara con descuento.</div>
+    </div>
+    <div class="faq-item" onclick="toggleFaq(this)">
+      <div class="faq-q">¿Cómo pago?</div>
+      <div class="faq-a">Coordinando la compra por WhatsApp. Aceptamos transferencia bancaria y Mercado Pago.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-top">
+    <div class="foot-brand">
+      <a href="/" style="text-decoration:none">
+        <svg width="148" height="36" viewBox="0 0 160 40" fill="none">
+          <rect x="0" y="6" width="36" height="26" rx="5" fill="#1A6EE8"/>
+          <rect x="36" y="11" width="7" height="16" rx="2" fill="#1A6EE8"/>
+          <circle cx="18" cy="19" r="7" fill="#060C14" stroke="#fff" stroke-width="1.5"/>
+          <circle cx="18" cy="19" r="3.5" fill="#060C14"/>
+          <circle cx="18" cy="19" r="1.5" fill="#1A6EE8"/>
+          <circle cx="30" cy="9" r="4" fill="#E02B2B"/>
+          <circle cx="30" cy="9" r="2" fill="#fff"/>
+          <text x="50" y="17" font-family="-apple-system,sans-serif" font-size="13" font-weight="700" fill="#ffffff" letter-spacing=".3">DASHCAM</text>
+          <text x="50" y="31" font-family="-apple-system,sans-serif" font-size="11" font-weight="400" fill="#7B9BC8" letter-spacing="2">ARGENTINA</text>
+        </svg>
+      </a>
+      <p>Especialistas en cámaras vehiculares. Para particulares y conductores de plataformas.</p>
+    </div>
+    <div class="foot-col">
+      <h4>Productos</h4>
+      <ul>
+        <li><a href="#productos">En stock</a></li>
+        <li><a href="#productos">Gama media</a></li>
+        <li><a href="#productos">Premium</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>Info</h4>
+      <ul>
+        <li><a href="#rideshare">Para conductores</a></li>
+        <li><a href="#faq">Preguntas frecuentes</a></li>
+        <li><a href="https://wa.me/5491156334969" target="_blank" rel="noopener">Consultar</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>Contacto</h4>
+      <ul>
+        <li><a href="https://wa.me/5491156334969" target="_blank" rel="noopener">WhatsApp</a></li>
+        <li><a href="mailto:hola@dashcamargentina.com">Email</a></li>
+        <li><a href="https://www.facebook.com/profile.php?id=61589453887151" target="_blank" rel="noopener">Facebook</a></li>
+        <li><a href="https://www.instagram.com/dash.camargentina/" target="_blank" rel="noopener">Instagram</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bot">
+    <p>© 2025 DashCam Argentina · dashcamargentina.com</p>
+    <p>Hecho en Argentina 🇦🇷</p>
+  </div>
+</footer>
+
+<a href="https://wa.me/5491156334969" class="waf" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+// Hero image fallback
+(function(){
+  const heroUrls = [
+    'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=1800&q=85',
+    'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=1800&q=85',
+    'https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=1800&q=85',
+    'https://images.unsplash.com/photo-1571068316344-75bc76f77890?w=1800&q=85',
+  ];
+  function tryHero(i){
+    if(i>=heroUrls.length) return;
+    const img=new Image();
+    img.onload=function(){
+      document.querySelector('.hero-bg').style.backgroundImage="url('"+heroUrls[i]+"')";
+    };
+    img.onerror=function(){ tryHero(i+1); };
+    img.src=heroUrls[i];
+  }
+  tryHero(0);
+})();
+
+const WA = '5491156334969';
+
+const products = [
+  { cat:'Dual · 3 canales', name:'DashCam 3 Canales 1080P', avail:'stock',
+    images:['cam1_main.png','cam1_specs.png','cam1_3ch.png','cam1_night.png','cam1_sensor.png','cam1_wifi.png','cam1_install.png','cam1_loop.png'],
+    desc:'Triple cobertura simultánea: lente frontal 170°, cámara interior 180° rotable y cámara trasera. Wi-Fi para descargar videos al celular, Sensor G que bloquea automáticamente el clip ante un impacto, y visión nocturna infrarroja.',
+    specs:['FHD 1080P en 3 canales simultáneos','Frontal: 170° gran angular','Interior: 180° rotable','Trasera: 170° gran angular','Wi-Fi con app móvil','Sensor G — bloqueo automático','Visión nocturna infrarroja','Grabación en bucle automática'],
+    ideal:['Conductores de Uber, Cabify y DiDi','Dueños de autos con conductores','Protección ante denuncias de pasajeros','Evidencia en los 3 ángulos'],
+    inc:'Cámara principal · Cámara trasera · Cable · Soporte adhesivo · Soporte ventosa · Manual en español',
+    price:'$89.999', usd:'≈ USD 75' },
+  { cat:'Gama media · 70mai (Xiaomi)', name:'70mai A510', avail:'pedido',
+    images:['70maiA510.png'],
+    desc:'La cámara de marca reconocida. 70mai es de Xiaomi: los clientes la buscan por nombre en Google. Doble lente 2K, GPS integrado y modo estacionamiento 24/7. ',
+    specs:['Frontal: 2K QHD (2560×1440)','Trasera: Full HD 1080P','GPS integrado con track de ruta','Modo parking 24/7','App 70mai iOS y Android','Grabación en bucle','Sensor G','Marca Xiaomi / 70mai'],
+    ideal:['Clientes que buscan marca conocida','Particulares con rutas frecuentes','Conductores que quieren calidad sin ir al tope','Evidencia ante siniestros viales'],
+    inc:'Cámara frontal 2K · Cámara trasera FHD · Cable · Soporte · Manual oficial',
+    price:'$210.000', usd:'≈ USD 175' },
+  { cat:'Gama media · Todo incluido', name:'Azdome M550', avail:'pedido',
+    images:['azdomeM550.png'],
+    desc:'La mayor cantidad de features al menor precio del mercado. Triple cámara 4K con Wi-Fi, GPS y app. Frontal + interior + trasera simultáneas. El producto que convence a cualquier presupuesto con argumentos irrefutables.',
+    specs:['Frontal: 4K UHD (3840×2160)','Interior: Full HD 1080P','Trasera: Full HD 1080P','GPS integrado','Wi-Fi con app móvil','Modo parking con detección de golpes','Sensor G','Grabación triple simultánea'],
+    ideal:['Conductores de Uber, Cabify y DiDi','Quienes necesitan 4K al mejor precio','Cobertura completa en tres ángulos','Presupuesto ajustado sin ceder features'],
+    inc:'Cámara frontal · Cámara interior · Cámara trasera · Cable · Soportes · Manual',
+    price:'$155.000', usd:'≈ USD 130' },
+  { cat:'Frontal · Sony STARVIS 2', name:'Viofo A119 Mini 2', avail:'pedido',
+    images:['viofoA119Mini2.png'],
+    desc:'Sensor Sony STARVIS 2 con grabación 2K a 60fps. Diseño ultracompacto que se instala detrás del espejo, casi invisible desde afuera. Visión nocturna de alta sensibilidad gracias a su apertura f/1.8. GPS y Wi-Fi incluidos.',
+    specs:['Sensor: Sony STARVIS 2','Resolución: 2K QHD a 60fps','Diseño ultracompacto','GPS integrado','Modo parking','Wi-Fi','Visión nocturna excepcional'],
+    ideal:['Autos donde la discreción del dispositivo importa','Quienes priorizan calidad de imagen nocturna','Conductores que manejan de noche o con poca luz','Uso particular en ciudad y ruta'],
+    inc:'Cámara Viofo A119 Mini 2 · Cable · Soporte adhesivo · Manual',
+    price:'$185.000', usd:'≈ USD 155' },
+  { cat:'Doble cámara · Sony STARVIS 2', name:'Viofo A229 Plus 2CH', avail:'pedido',
+    images:['viofoA229Plus2CH.png'],
+    desc:'Doble sensor Sony STARVIS 2 en frontal y trasera, ambos grabando en 2K. Wi-Fi 5GHz para transferir videos al celular en segundos. GPS integrado, control por voz y modo parking avanzado.',
+    specs:['Frontal: Sony STARVIS 2 — 2K QHD','Trasera: Sony STARVIS 2 — 2K QHD','Wi-Fi 5GHz (descarga ultrarrápida)','GPS integrado','Control por voz','Modo parking avanzado','App con edición de video'],
+    ideal:['Conductores profesionales y particulares exigentes','Quienes buscan la mejor calidad de imagen posible','Grabación nocturna excepcional en ambos ángulos','Autos de gama media y alta'],
+    inc:'Cámara frontal Viofo · Cámara trasera Viofo · Cable · Soportes · Manual',
+    price:'$370.000', usd:'≈ USD 310' },
+  { cat:'Premium · 70mai (Xiaomi)', name:'70mai A810', avail:'pedido',
+    images:['70maiA810.png'],
+    desc:'Grabación 4K con sensor Sony STARVIS 2 y sistema ADAS que alerta ante posibles colisiones y desvíos de carril. GPS integrado, parking 24/7 y app oficial 70mai.',
+    specs:['Sensor: Sony STARVIS 2','Resolución: 4K UHD','ADAS completo (colisión + carril)','GPS integrado','Parking 24/7','App 70mai iOS y Android','Marca 70mai (Xiaomi)'],
+    ideal:['Conductores que quieren imagen 4K con sensor Sony','Quienes valoran las alertas ADAS en ruta','Viajes largos con monitoreo continuo de carril','Particulares con autos de gama media y alta'],
+    inc:'Cámara 70mai A810 · Cámara trasera · Cable · Soporte · Manual oficial',
+    price:'$260.000', usd:'≈ USD 215' },
+  { cat:'Prestige · Cloud · Full HD', name:'BlackVue DR770X-2CH', avail:'pedido',
+    images:['BlackVue_DR770x-2ch.png'],
+    desc:'Doble cámara Full HD con conectividad cloud: accedé a las grabaciones en tiempo real desde cualquier lugar a través de la app BlackVue. Diseño cilindro discreto y modo parking inteligente 24/7.',
+    specs:['Resolución: Full HD doble (frontal + trasera)','Conectividad Cloud (BlackVue Cloud)','App BlackVue iOS y Android','Parking inteligente 24/7','Diseño cilindro — discreción total','Wi-Fi + Bluetooth','Sensor Sony'],
+    ideal:['Autos de alta gama donde la estética importa','Quienes quieren acceso remoto a las grabaciones','Flotas o vehículos que requieren monitoreo a distancia','La dashcam más completa del mercado'],
+    inc:'Cámara delantera BlackVue · Cámara trasera · Cable OBD · Soporte · Caja premium',
+    price:'$540.000', usd:'≈ USD 450' },
+];
+
+let galIdx = 0, galImgs = [];
+
+function openModal(i) {
+  const p = products[i];
+  galImgs = p.images; galIdx = 0;
+  const gal = document.getElementById('modal-gal');
+  gal.querySelectorAll('img').forEach(el => el.remove());
+  document.getElementById('gal-dots').innerHTML = '';
+  if (galImgs.length) {
+    gal.style.display = '';
+    galImgs.forEach((src, idx) => {
+      const img = document.createElement('img');
+      img.src = src; img.alt = p.name;
+      if (!idx) img.classList.add('active');
+      gal.insertBefore(img, gal.querySelector('.gal-prev').nextSibling);
+      const dot = document.createElement('div');
+      dot.className = 'gal-dot' + (!idx?' active':'');
+      dot.onclick = e => { e.stopPropagation(); toSlide(idx); };
+      document.getElementById('gal-dots').appendChild(dot);
+    });
+  } else { gal.style.display = 'none'; }
+  const av = document.getElementById('m-avail');
+  av.className = 'modal-avail ' + p.avail;
+  document.getElementById('m-avail-txt').textContent = p.avail==='stock' ? 'En stock · Envío inmediato' : 'Bajo pedido · 10–20 días';
+  document.getElementById('m-cat').textContent = p.cat;
+  document.getElementById('m-name').textContent = p.name;
+  document.getElementById('m-desc').textContent = p.desc;
+  document.getElementById('m-specs').innerHTML = p.specs.map(s=>`<div class="spec-row">${s}</div>`).join('');
+  document.getElementById('m-ideal').innerHTML = p.ideal.map(s=>`<div class="ideal-row">${s}</div>`).join('');
+  document.getElementById('m-inc').innerHTML = '<strong style="color:#fff">Incluye:</strong> ' + p.inc;
+  document.getElementById('m-price').textContent = p.price;
+  document.getElementById('m-usd').textContent = p.usd;
+  document.getElementById('m-wa').href = `https://wa.me/${WA}?text=Hola,%20me%20interesa%20la%20${encodeURIComponent(p.name)}`;
+  document.getElementById('modal').style.display = 'block';
+  document.getElementById('modal').scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+}
+
+function toSlide(idx) {
+  const gal = document.getElementById('modal-gal');
+  gal.querySelectorAll('img').forEach((img,i) => img.classList.toggle('active', i===idx));
+  document.getElementById('gal-dots').querySelectorAll('.gal-dot').forEach((d,i) => d.classList.toggle('active', i===idx));
+  galIdx = idx;
+}
+function gallNav(dir, e) {
+  e.stopPropagation();
+  if (!galImgs.length) return;
+  toSlide((galIdx + dir + galImgs.length) % galImgs.length);
+}
+function closeModal() { document.getElementById('modal').style.display='none'; document.body.style.overflow=''; }
+function handleOverlayClick(e) { if (e.target===document.getElementById('modal')) closeModal(); }
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); });
+
+function showRS(id, btn) {
+  document.querySelectorAll('.rs-tab').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.rs-content').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('rs-'+id).classList.add('active');
+}
+
+function fp(cat, btn) {
+  document.querySelectorAll('.filt').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.prod-card').forEach(c => {
+    const show = cat==='all' ? true : cat==='stock' ? c.dataset.avail==='stock' : c.dataset.cat===cat;
+    c.style.display = show ? '' : 'none';
+  });
+}
+
+function toggleFaq(el) { el.classList.toggle('open'); }
+
+function toggleMenu() {
+  const m = document.getElementById('mob-menu');
+  m.style.display = m.style.display==='flex' ? 'none' : 'flex';
+}
+window.addEventListener('scroll', () => {
+  document.getElementById('mob-menu').style.display = 'none';
+});
+</script>
+</body>
+</html>
