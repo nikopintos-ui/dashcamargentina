@@ -472,6 +472,26 @@ footer{
 }
 .modal-wa-btn:hover{background:#1EBE57}
 
+/* ── VIDEO SECTION ─────────────────────── */
+.video-section{position:relative;overflow:hidden;background:#03070D}
+.video-hero{max-width:1200px;margin:0 auto;padding:60px 5%;display:grid;grid-template-columns:1fr;gap:40px}
+.video-container{position:relative;width:100%;aspect-ratio:16/9;background:#0A1020;border-radius:12px;overflow:hidden;box-shadow:0 20px 60px rgba(26,110,232,.15)}
+.video-player{width:100%;height:100%;display:block;object-fit:cover}
+.video-controls{position:absolute;bottom:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:20px;gap:12px;background:linear-gradient(180deg,rgba(3,7,13,0) 0%,rgba(3,7,13,.95) 60%);z-index:10}
+.video-progress{flex:1;height:3px;background:rgba(255,255,255,.1);border-radius:2px;position:relative;overflow:hidden;cursor:pointer}
+.video-progress-bar{height:100%;background:var(--ac);width:0%;transition:width .1s linear}
+.video-play-btn{width:40px;height:40px;border-radius:50%;background:var(--ac);border:none;color:#fff;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:background .2s;flex-shrink:0;font-weight:bold}
+.video-play-btn:hover{background:var(--acl)}
+.video-time{font-size:11px;color:var(--txd);white-space:nowrap;min-width:45px;text-align:center}
+.video-dots{display:flex;gap:8px;flex-shrink:0}
+.video-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.3);cursor:pointer;transition:all .2s}
+.video-dot.active{background:var(--ac);width:24px;border-radius:4px}
+.video-content{display:flex;flex-direction:column;justify-content:center;text-align:center}
+.video-badge{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--ac);margin-bottom:16px;width:fit-content;margin-left:auto;margin-right:auto}
+.video-badge span{width:6px;height:6px;border-radius:50%;background:#E02B2B;animation:blink 1.4s infinite}
+.video-title{font-size:clamp(28px,4vw,48px);font-weight:800;letter-spacing:-1px;margin-bottom:12px}
+.video-desc{font-size:16px;color:var(--txd);line-height:1.6;margin-bottom:24px;max-width:700px;margin-left:auto;margin-right:auto}
+
 /* ── RESPONSIVE ────────────────────────── */
 @media(max-width:900px){
   .split{grid-template-columns:1fr}
@@ -589,6 +609,28 @@ footer{
   <div class="trust-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 014.34 12a19.79 19.79 0 01-3.07-8.67A2 2 0 013.25 1.25h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.91 9.91a16 16 0 006.06 6.06l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>Soporte WhatsApp</div>
   <div class="trust-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/></svg>Accesorios incluidos</div>
 </div>
+
+<!-- VIDEOS -->
+<section class="section video-section">
+  <div class="video-hero">
+    <div class="video-container">
+      <video class="video-player" id="videoPlayer" playsinline></video>
+      <div class="video-controls">
+        <button class="video-play-btn" id="playBtn" onclick="togglePlay()">▶</button>
+        <div class="video-progress" onclick="seekVideo(event)">
+          <div class="video-progress-bar" id="progressBar"></div>
+        </div>
+        <div class="video-time"><span id="currentTime">0:00</span> / <span id="duration">0:00</span></div>
+        <div class="video-dots" id="videoDots"></div>
+      </div>
+    </div>
+    <div class="video-content">
+      <div class="video-badge"><span></span>Seguridad en acción</div>
+      <h2 class="video-title">Casos reales de dashcam</h2>
+      <p class="video-desc">Mirá cómo nuestras cámaras capturan momentos críticos. Desde choques documentados hasta accidentes evitados, la evidencia que protege a nuestros clientes.</p>
+    </div>
+  </div>
+</section>
 
 <!-- CINEMATIC: Conductores de plataformas -->
 <section class="section section-deeper" id="rideshare">
@@ -927,6 +969,88 @@ footer{
 })();
 
 const WA = '5491156334969';
+
+// Videos
+const videos = ['video1.mp4', 'video2.mp4', 'video3.mp4', 'video4.mp4', 'video5.mp4'];
+let currentVideoIdx = 0;
+let isPlaying = false;
+
+function initVideos() {
+  const player = document.getElementById('videoPlayer');
+  const dotContainer = document.getElementById('videoDots');
+
+  videos.forEach((_, idx) => {
+    const dot = document.createElement('div');
+    dot.className = 'video-dot' + (idx === 0 ? ' active' : '');
+    dot.onclick = () => switchVideo(idx);
+    dotContainer.appendChild(dot);
+  });
+
+  player.src = videos[0];
+  player.addEventListener('timeupdate', updateProgress);
+  player.addEventListener('loadedmetadata', updateDuration);
+  player.addEventListener('ended', nextVideo);
+  updateDuration();
+}
+
+function togglePlay() {
+  const player = document.getElementById('videoPlayer');
+  const btn = document.getElementById('playBtn');
+  if (player.paused) {
+    player.play();
+    btn.textContent = '⏸';
+    isPlaying = true;
+  } else {
+    player.pause();
+    btn.textContent = '▶';
+    isPlaying = false;
+  }
+}
+
+function switchVideo(idx) {
+  const player = document.getElementById('videoPlayer');
+  currentVideoIdx = idx;
+  player.src = videos[idx];
+  document.querySelectorAll('.video-dot').forEach((d, i) => d.classList.toggle('active', i === idx));
+  if (isPlaying) player.play();
+  updateProgress();
+}
+
+function nextVideo() {
+  switchVideo((currentVideoIdx + 1) % videos.length);
+  document.getElementById('videoPlayer').play();
+}
+
+function updateProgress() {
+  const player = document.getElementById('videoPlayer');
+  const bar = document.getElementById('progressBar');
+  const time = document.getElementById('currentTime');
+
+  const percent = (player.currentTime / player.duration) * 100;
+  bar.style.width = percent + '%';
+  time.textContent = formatTime(player.currentTime);
+}
+
+function updateDuration() {
+  const player = document.getElementById('videoPlayer');
+  document.getElementById('duration').textContent = formatTime(player.duration || 0);
+}
+
+function seekVideo(e) {
+  const player = document.getElementById('videoPlayer');
+  const rect = e.currentTarget.getBoundingClientRect();
+  const percent = (e.clientX - rect.left) / rect.width;
+  player.currentTime = percent * player.duration;
+}
+
+function formatTime(seconds) {
+  if (!seconds || !isFinite(seconds)) return '0:00';
+  const mins = Math.floor(seconds / 60);
+  const secs = Math.floor(seconds % 60);
+  return mins + ':' + (secs < 10 ? '0' : '') + secs;
+}
+
+document.addEventListener('DOMContentLoaded', initVideos);
 
 const products = [
   { cat:'Dual · 3 canales', name:'DashCam 3 Canales 1080P', avail:'stock',
