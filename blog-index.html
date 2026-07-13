@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Blog de DashCam Argentina - Artículos sobre dashcams, guías de instalación, comparativas de marcas y protección legal con cámaras vehiculares.">
+<meta name="keywords" content="blog dashcam, guía dashcam, comparativa cámaras auto, dashcam seguro, instalación cámara">
+<title>Blog - DashCam Argentina | Guías y Comparativas</title>
+<link rel="canonical" href="https://dashcamargentina.com/blog/">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --pr:#060C14;--ac:#1A6EE8;--acl:#4D9FFF;
+  --tx:#fff;--txd:#A8B8D0;--txdd:#4A5A70;
+  --bd:#1A2535;--rs:6px;
+}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--pr);color:var(--tx);overflow-x:hidden}
+
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 5%;height:64px;
+  background:rgba(6,12,20,.85);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.logo{text-decoration:none;display:flex;align-items:center;color:#fff;font-weight:700}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{color:var(--txd);text-decoration:none;font-size:13px;font-weight:500;transition:color .2s}
+.nav-links a:hover{color:#fff}
+
+.hero-blog{
+  padding-top:120px;padding-bottom:60px;text-align:center;
+  background:linear-gradient(135deg,#0A1628 0%,#0D1F3C 50%,#0A1628 100%);
+}
+.hero-blog h1{font-size:clamp(36px,5vw,56px);font-weight:800;margin-bottom:16px;letter-spacing:-1px}
+.hero-blog p{font-size:18px;color:var(--txd);max-width:600px;margin:0 auto}
+
+.blog-container{max-width:1000px;margin:0 auto;padding:60px 5%}
+.blog-grid{display:grid;gap:40px}
+
+.blog-card{
+  background:#080F18;border:1px solid var(--bd);border-radius:12px;
+  overflow:hidden;transition:all .3s;cursor:pointer;
+}
+.blog-card:hover{border-color:var(--ac);transform:translateY(-4px);box-shadow:0 20px 40px rgba(26,110,232,.2)}
+
+.blog-card-content{padding:32px}
+.blog-date{font-size:12px;color:var(--ac);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:12px}
+.blog-card h2{font-size:24px;font-weight:800;margin-bottom:12px;letter-spacing:-.5px;color:#fff}
+.blog-card p{font-size:15px;color:var(--txd);line-height:1.7;margin-bottom:20px}
+.blog-meta{display:flex;gap:16px;font-size:12px;color:var(--txdd)}
+.blog-meta span{display:flex;align-items:center;gap:6px}
+.read-more{display:inline-flex;align-items:center;gap:8px;color:var(--ac);font-weight:600;text-decoration:none;transition:gap .2s}
+.read-more:hover{gap:12px}
+.read-more::after{content:'→'}
+
+footer{
+  background:#03070D;border-top:1px solid var(--bd);
+  padding:40px 5%;text-align:center;color:var(--txd);font-size:13px;
+}
+
+@media(max-width:640px){
+  nav{padding:0 5%;height:56px}
+  .nav-links{display:none}
+  .blog-card-content{padding:20px}
+  .blog-card h2{font-size:18px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="/">DashCam Argentina</a>
+  <ul class="nav-links">
+    <li><a href="/#productos">Productos</a></li>
+    <li><a href="/blog/">Blog</a></li>
+    <li><a href="/#faq">FAQ</a></li>
+    <li><a href="https://wa.me/5491156334969" target="_blank" style="color:#25D366">WhatsApp</a></li>
+  </ul>
+</nav>
+
+<section class="hero-blog">
+  <div style="max-width:900px;margin:0 auto;padding:0 5%">
+    <h1>Blog de DashCam</h1>
+    <p>Guías, comparativas y todo lo que necesitas saber sobre cámaras vehiculares, protección legal y dashcams</p>
+  </div>
+</section>
+
+<div class="blog-container">
+  <div class="blog-grid">
+
+    <!-- Artículo 1: Comparativa de Marcas -->
+    <a href="#articulo-1" class="blog-card" style="text-decoration:none;color:inherit">
+      <div class="blog-card-content">
+        <div class="blog-date">Guía Comparativa</div>
+        <h2>Mejores dashcams 2026: Comparativa Viofo vs 70mai vs Azdome vs DDPAI</h2>
+        <p>Analizamos las 4 mejores marcas de dashcams del mercado. Precio, calidad, tecnología, garantía. ¿Cuál es la mejor para ti?</p>
+        <div class="blog-meta">
+          <span>📖 8 min de lectura</span>
+          <span>🎯 1200 palabras</span>
+        </div>
+        <span class="read-more">Leer artículo</span>
+      </div>
+    </a>
+
+    <!-- Artículo 2: Dashcam y Seguros -->
+    <a href="#articulo-2" class="blog-card" style="text-decoration:none;color:inherit">
+      <div class="blog-card-content">
+        <div class="blog-date">Protección Legal</div>
+        <h2>Dashcam y seguros: Por qué las aseguradoras las recomiendan en 2026</h2>
+        <p>Cómo el video de una dashcam te protege legalmente. Descuentos en seguros, casos ganados con evidencia y por qué es mejor que solo seguro.</p>
+        <div class="blog-meta">
+          <span>📖 7 min de lectura</span>
+          <span>🎯 900 palabras</span>
+        </div>
+        <span class="read-more">Leer artículo</span>
+      </div>
+    </a>
+
+    <!-- Artículo 3: Instalación -->
+    <a href="#articulo-3" class="blog-card" style="text-decoration:none;color:inherit">
+      <div class="blog-card-content">
+        <div class="blog-date">Tutorial Paso a Paso</div>
+        <h2>Guía de instalación de dashcam: Todo lo que necesitas saber</h2>
+        <p>Instrucciones completas para instalar tu dashcam correctamente. Herramientas, posicionamiento, ocultar cables y errores comunes.</p>
+        <div class="blog-meta">
+          <span>📖 6 min de lectura</span>
+          <span>🎯 700 palabras</span>
+        </div>
+        <span class="read-more">Leer artículo</span>
+      </div>
+    </a>
+
+    <!-- Artículo 4: Uber/Plataformas -->
+    <a href="#articulo-4" class="blog-card" style="text-decoration:none;color:inherit">
+      <div class="blog-card-content">
+        <div class="blog-date">Para Conductores</div>
+        <h2>Dashcam para Uber, Cabify y DiDi 2026: Guía completa</h2>
+        <p>Por qué es obligatorio tener dashcam. Qué modelo elegir por presupuesto, instalación discreta y cómo usarla en disputas.</p>
+        <div class="blog-meta">
+          <span>📖 7 min de lectura</span>
+          <span>🎯 900 palabras</span>
+        </div>
+        <span class="read-more">Leer artículo</span>
+      </div>
+    </a>
+
+    <!-- Artículo 5: DDPAI -->
+    <a href="#articulo-5" class="blog-card" style="text-decoration:none;color:inherit">
+      <div class="blog-card-content">
+        <div class="blog-date">Marca Premium</div>
+        <h2>DDPAI: La marca que confían los profesionales en 2026</h2>
+        <p>Descubre por qué DDPAI es premium. Conectividad 4G, sensor Sony STARVIS 2, visión nocturna superior y por qué vale la inversión.</p>
+        <div class="blog-meta">
+          <span>📖 6 min de lectura</span>
+          <span>🎯 750 palabras</span>
+        </div>
+        <span class="read-more">Leer artículo</span>
+      </div>
+    </a>
+
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 DashCam Argentina · <a href="mailto:hola@dashcamargentina.com" style="color:var(--ac);text-decoration:none">Contacto</a> · <a href="https://wa.me/5491156334969" style="color:var(--ac);text-decoration:none">WhatsApp</a></p>
+</footer>
+
+<script>
+// Scroll a artículos
+document.querySelectorAll('a[href^="#articulo"]').forEach(link => {
+  link.addEventListener('click', (e) => {
+    const target = document.querySelector(e.currentTarget.getAttribute('href'));
+    if(target) {
+      e.preventDefault();
+      target.scrollIntoView({behavior:'smooth'});
+    }
+  });
+});
+</script>
+</body>
+</html>
