@@ -4,14 +4,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="DashCam Argentina — Cámaras vehiculares 4K con visión nocturna y GPS. Para particulares y conductores de Uber, Cabify y DiDi.">
-<meta property="og:title" content="DashCam Argentina — Grabá cada viaje.">
-<meta property="og:description" content="Cámaras vehiculares 4K. Envíos a todo el país.">
+<meta property="og:title" content="Dashcam Argentina | Cámaras de Tablero 4K con GPS">
+<meta property="og:description" content="Dashcam y cámaras vehiculares 4K. Ideal para Uber, Cabify y DiDi. Visión nocturna, GPS y sensor G. Envíos a todo el país.">
 <meta property="og:url" content="https://dashcamargentina.com">
 <meta property="og:type" content="website">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="favicon-32.png">
-<title>DashCam Argentina — Grabá cada viaje.</title>
+<title>Dashcam Argentina | Cámaras Vehiculares 4K con GPS - Compra Online</title>
+<meta name="description" content="Compra dashcam 4K para tu auto. Cámaras de tablero con GPS, visión nocturna y sensor G. Ideal para Uber, Cabify y DiDi. ¡Envíos a todo el país! Garantía 12 meses.">
+<meta name="keywords" content="dashcam, cámara de auto, cámara de tablero, dashcam 4K, cámara frontal, cámara trasera, GPS, visión nocturna, Uber, Cabify, DiDi">
+<meta name="author" content="DashCam Argentina">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://dashcamargentina.com/">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -589,7 +594,7 @@ footer{
     <div class="hero-eyebrow">
       <span></span> Grabando ahora mismo
     </div>
-    <h1>Grabá cada viaje.<br><em>Protegé tu auto.</em></h1>
+    <h1>Dashcam para tu auto.<br><em>Cámaras de tablero 4K con GPS.</em></h1>
     <p class="hero-sub">Cámaras vehiculares 4K con visión nocturna, GPS y sensor G. Para particulares y conductores de Uber, Cabify y DiDi.</p>
     <div class="hero-btns">
       <a href="#productos" class="btn-primary">Ver cámaras</a>
@@ -642,8 +647,8 @@ footer{
       </div>
       <div class="split-text">
         <span class="eyebrow">Para conductores</span>
-        <h2 class="section-title">Tu historial.<br>Tu defensa.</h2>
-        <p class="section-sub">Uber, Cabify y DiDi no te protegen ante acusaciones falsas. Una cámara sí. El video es evidencia irrefutable en cualquier disputa.</p>
+        <h2 class="section-title">Dashcam para Uber.<br>Tu defensa legal.</h2>
+        <p class="section-sub">Cámara de tablero con GPS para Uber, Cabify y DiDi. Protégete ante acusaciones falsas. El video es evidencia irrefutable en cualquier disputa.</p>
         <div class="split-pills">
           <span class="split-pill">● Uber</span>
           <span class="split-pill">● Cabify</span>
@@ -683,8 +688,8 @@ footer{
 <section class="section section-dark" id="productos">
   <div class="prod-header">
     <span class="eyebrow">Catálogo completo</span>
-    <h2 class="section-title">Todas las cámaras</h2>
-    <p class="section-sub">Desde la entrada perfecta para plataformas hasta la top de gama para autos premium.</p>
+    <h2 class="section-title">Dashcams y cámaras vehiculares 4K</h2>
+    <p class="section-sub">Cámaras de tablero desde entrada perfecta para plataformas hasta modelo top de gama. GPS integrado, visión nocturna y sensor G.</p>
   </div>
   <div class="filters">
     <button class="filt active" onclick="fp('all',this)">Todos</button>
@@ -1051,6 +1056,30 @@ function formatTime(seconds) {
 }
 
 document.addEventListener('DOMContentLoaded', initVideos);
+
+// Schema Markup - SEO
+const schemaMarkup = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "DashCam Argentina",
+  "description": "Tienda especializada en cámaras vehiculares y dashcams de alta calidad",
+  "url": "https://dashcamargentina.com",
+  "telephone": "+5491156334969",
+  "email": "hola@dashcamargentina.com",
+  "address": {
+    "@type": "PostalAddress",
+    "addressCountry": "AR",
+    "addressLocality": "Argentina"
+  },
+  "sameAs": [
+    "https://www.facebook.com/profile.php?id=61589453887151",
+    "https://www.instagram.com/dash.camargentina/"
+  ]
+};
+const script = document.createElement('script');
+script.type = 'application/ld+json';
+script.textContent = JSON.stringify(schemaMarkup);
+document.head.appendChild(script);
 
 const products = [
   { cat:'Dual · 3 canales', name:'DashCam 3 Canales 1080P', avail:'stock',
