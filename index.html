@@ -529,6 +529,54 @@ footer{
   .modal-body{padding:20px}
   .modal-name{font-size:20px}
 }
+
+/* ── TESTIMONIOS ───────────────────────────────── */
+.testimonials-section{
+  padding:80px 5%;background:rgba(6,12,20,.5);
+  border-top:1px solid var(--bd);
+}
+.testimonials-section h2{
+  font-size:clamp(32px,6vw,48px);font-weight:800;
+  text-align:center;margin-bottom:12px;
+}
+.section-subtitle{
+  text-align:center;color:var(--txd);
+  margin-bottom:48px;font-size:16px;
+}
+.testimonials-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:24px;max-width:1400px;margin:0 auto;
+}
+.testimonial-card{
+  background:#080F18;border:1px solid var(--bd);
+  border-radius:8px;padding:28px 24px;
+  transition:all .3s;cursor:default;
+}
+.testimonial-card:hover{
+  background:#0D1620;border-color:var(--ac);
+  transform:translateY(-4px);
+}
+.testimonial-stars{
+  font-size:18px;margin-bottom:16px;letter-spacing:2px;
+}
+.testimonial-text{
+  font-size:15px;line-height:1.7;color:var(--txd);
+  margin-bottom:20px;font-style:italic;
+}
+.testimonial-author{
+  display:flex;flex-direction:column;gap:4px;
+}
+.testimonial-author strong{
+  color:#fff;font-size:14px;font-weight:600;
+}
+.testimonial-author span{
+  font-size:12px;color:var(--ac);font-weight:500;
+}
+@media(max-width:768px){
+  .testimonials-section{padding:60px 5%}
+  .testimonials-grid{gap:16px}
+  .testimonial-card{padding:20px}
+}
 </style>
 </head>
 <body>
@@ -923,6 +971,52 @@ footer{
     <div class="faq-item" onclick="toggleFaq(this)">
       <div class="faq-q">¿Cómo pago?</div>
       <div class="faq-a">Coordinando la compra por WhatsApp. Aceptamos transferencia bancaria y Mercado Pago.</div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIOS -->
+<section class="testimonials-section">
+  <div class="container">
+    <h2>Lo que dicen nuestros clientes</h2>
+    <p class="section-subtitle">Miles de conductores confían en nuestras cámaras para proteger su vehículo</p>
+
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+        <p class="testimonial-text">"Compré el Dash Cam Triple hace 3 meses. Hace una semana tuve un choque en la autopista. Gracias a la grabación en 3 ángulos, el seguro pagó todo sin discusión. Excelente inversión."</p>
+        <div class="testimonial-author">
+          <strong>Jorge M.</strong>
+          <span>San Isidro, Buenos Aires</span>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+        <p class="testimonial-text">"Conductor de Uber hace 2 años. Esta cámara me da paz mental. Los pasajeros ven que grabo y se portan mejor. Además, las discusiones con otros conductores se resuelven con la grabación."</p>
+        <div class="testimonial-author">
+          <strong>Carlos D.</strong>
+          <span>Conductor Uber, CABA</span>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+        <p class="testimonial-text">"Instalación súper fácil, incluso sin saber. La calidad de video es impresionante de noche. El GPS integrado y el parking monitor 24/7 me tranquilizan cuando dejo el auto estacionado."</p>
+        <div class="testimonial-author">
+          <strong>María L.</strong>
+          <span>La Plata, Buenos Aires</span>
+        </div>
+      </div>
+
+      <div class="testimonial-card">
+        <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+        <p class="testimonial-text">"Trabajo en reparto (Cabify, DiDi, Uber Eats). La cámara doble frontal y trasera es indispensable. Ya se pagó sola por documentar una falsa acusación de un pasajero."</p>
+        <div class="testimonial-author">
+          <strong>Sergio T.</strong>
+          <span>Conductor profesional, CABA</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
