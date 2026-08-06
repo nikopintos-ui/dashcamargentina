@@ -26,6 +26,18 @@
 
   gtag('config', 'G-5PTLZZ1G97');
 </script>
+<script>
+document.addEventListener('click', function(e) {
+  const link = e.target.closest('a[href*="wa.me"]');
+  if (link) {
+    gtag('event', 'whatsapp_click', {
+      'page_title': document.title,
+      'page_path': window.location.pathname,
+      'link_text': link.textContent.trim() || 'WhatsApp Button'
+    });
+  }
+});
+</script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
