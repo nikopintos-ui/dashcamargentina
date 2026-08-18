@@ -243,6 +243,7 @@ nav{
   letter-spacing:.8px;text-transform:uppercase;z-index:2;
 }
 .b-stock{background:#0D9F6E;color:#fff}
+.b-no-stock{background:#DC2626;color:#fff}
 .b-mid{background:var(--ac);color:#fff}
 .b-prem{background:#7C3AED;color:#fff}
 .b-prestige{background:linear-gradient(135deg,#1A1A1A,#2A2A2A);color:#C0A060;border:1px solid #C0A06050}
@@ -770,13 +771,13 @@ footer{
   </div>
   <div class="prod-grid" id="prod-grid">
 
-    <!-- 1. DashCam 3 Canales — EN STOCK -->
-    <div class="prod-card" data-cat="entry" data-avail="stock" onclick="openModal(0)">
+    <!-- 1. DashCam 3 Canales — SIN STOCK -->
+    <div class="prod-card" data-cat="entry" data-avail="no-stock" onclick="openModal(0)">
       <div class="prod-img">
-        <span class="prod-badge b-stock">En stock</span>
+        <span class="prod-badge b-no-stock">Sin stock</span>
         <img src="cam1_main.png" alt="Dashcam 3 Canales 1080P - Cámara frontal trasera interior con WiFi y sensor G">
       </div>
-      <div class="prod-avail stock"><span class="avail-dot"></span>En stock · Envío inmediato</div>
+      <div class="prod-avail stock"><span class="avail-dot"></span>Sin stock</div>
       <div class="prod-body">
         <div class="prod-cat">Dual · 3 canales</div>
         <div class="prod-name">DashCam 3 Canales 1080P</div>
