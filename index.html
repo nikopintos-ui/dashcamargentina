@@ -251,6 +251,14 @@ nav{
 .carousel-nav:hover{color:var(--acl)}
 .carousel-nav:disabled{opacity:.3;cursor:not-allowed}
 
+@media(max-width:768px){
+  .carousel-container{padding:20px 0;gap:0;max-width:100%}
+  .carousel-inner{display:flex;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scroll-behavior:smooth;border-radius:0;width:100vw}
+  .carousel-slide{display:block!important;width:100vw;flex-shrink:0;animation:none;height:auto}
+  .carousel-slide img{width:100%;height:auto;display:block}
+  .carousel-nav{display:none}
+}
+
 .prod-card{
   background:#080F18;cursor:pointer;
   transition:background .25s;overflow:hidden;position:relative;
