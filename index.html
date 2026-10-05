@@ -81,11 +81,12 @@ nav{
 }
 .hero-bg{
   position:absolute;inset:0;
-  /* Foto: autopista nocturna con light trails */
-  background-image:url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=1800&q=85');
+  background-image:url('banner_web_pc.png');
   background-size:cover;
-  background-position:center 60%;
-  filter:brightness(.42) saturate(1.15);
+  background-position:center;
+}
+@media(max-width:768px){
+  .hero-bg{background-image:url('banner_mobile.png')}
 }
 .hero-overlay{
   position:absolute;inset:0;
@@ -152,6 +153,23 @@ nav{
 .trust-item:last-child{border-right:none}
 .trust-item svg{color:var(--ac);flex-shrink:0}
 
+/* ── CTA BOTONES ───────────────────────── */
+.cta-botones{
+  padding:60px 5%;background:var(--pr);
+  display:flex;align-items:center;justify-content:center;gap:24px;
+  flex-wrap:wrap;max-width:1200px;margin:0 auto;
+}
+.cta-btn-grande{
+  display:block;text-decoration:none;border-radius:12px;
+  overflow:hidden;transition:transform .2s,box-shadow .2s;
+  box-shadow:0 4px 12px rgba(0,0,0,.3);
+}
+.cta-btn-grande:hover{transform:translateY(-4px);box-shadow:0 8px 20px rgba(0,0,0,.4)}
+.cta-btn-grande img{
+  display:block;width:100%;height:auto;
+  max-width:280px;
+}
+
 /* ── SECTIONS ──────────────────────────── */
 .section{padding:100px 5%}
 .section-dark{background:var(--pr)}
@@ -209,6 +227,31 @@ nav{
   display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
   gap:2px;max-width:1400px;margin:0 auto;
 }
+/* ── CARROUSEL FLYERS ──────────────────── */
+.carousel-container{
+  position:relative;width:100%;max-width:900px;margin:0 auto;
+  display:flex;align-items:center;justify-content:center;gap:24px;
+  padding:40px 20px;
+}
+.carousel-inner{
+  position:relative;flex:1;overflow:hidden;border-radius:12px;
+}
+.carousel-slide{
+  display:none;width:100%;animation:fadeIn .3s;
+}
+.carousel-slide.active{display:block}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.carousel-slide img{
+  width:100%;height:auto;display:block;
+}
+.carousel-nav{
+  background:none;border:none;color:var(--ac);font-size:32px;
+  cursor:pointer;padding:8px;transition:color .2s;z-index:10;
+  flex-shrink:0;
+}
+.carousel-nav:hover{color:var(--acl)}
+.carousel-nav:disabled{opacity:.3;cursor:not-allowed}
+
 .prod-card{
   background:#080F18;cursor:pointer;
   transition:background .25s;overflow:hidden;position:relative;
@@ -665,12 +708,6 @@ footer{
     <div class="hero-eyebrow">
       <span></span> Grabando ahora mismo
     </div>
-    <h1>Cámaras para auto y dashcam con GPS, para tu auto o para trabajar en Uber</h1>
-    <p class="hero-sub">Grabación en Full HD y 4K, visión nocturna y sensor G. Entrega en el día en CABA, envíos a todo el país y garantía de 12 meses.</p>
-    <div class="hero-btns">
-      <a href="#productos" class="btn-primary">Ver cámaras</a>
-      <a href="https://wa.me/5491156334969" target="_blank" rel="noopener" class="btn-ghost">Consultar →</a>
-    </div>
   </div>
   <div class="hero-scroll">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg>
@@ -684,6 +721,16 @@ footer{
   <div class="trust-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>Garantía de 12 meses</div>
   <div class="trust-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>Hasta 6 cuotas sin interés</div>
   <div class="trust-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>Envío gratis desde $50.000</div>
+</div>
+
+<!-- ¿DÓNDE COMPRAR? -->
+<div class="cta-botones">
+  <a href="https://dashcams.com.ar" target="_blank" rel="noopener" class="cta-btn-grande">
+    <img src="tienda_boton.webp" alt="Comprar en la tienda online dashcams.com.ar">
+  </a>
+  <a href="https://listado.mercadolibre.com.ar/_CustId_285258952" target="_blank" rel="noopener" class="cta-btn-grande">
+    <img src="ML_buton.webp" alt="Comprar en Mercado Libre">
+  </a>
 </div>
 
 <!-- CINEMATIC: Conductores de plataformas -->
@@ -733,14 +780,31 @@ footer{
   </div>
 </section>
 
-<!-- PRODUCTOS -->
+<!-- PRODUCTOS: CARROUSEL -->
 <section class="section section-dark" id="productos">
-  <div class="prod-header">
-    <span class="eyebrow">Catálogo completo</span>
-    <h2 class="section-title">Dashcams y cámaras vehiculares 4K</h2>
-    <p class="section-sub">Cámaras de tablero desde entrada perfecta para plataformas hasta modelo top de gama. GPS integrado, visión nocturna y sensor G.</p>
+  <div style="text-align:center;margin-bottom:60px">
+    <span class="eyebrow">Catálogo</span>
+    <h2 class="section-title">Dashcams destacadas</h2>
   </div>
-  <div class="prod-grid" id="prod-grid">
+  <div class="carousel-container">
+    <button class="carousel-nav" id="prevBtn" onclick="carouselPrev()">❮</button>
+    <div class="carousel-inner">
+      <div class="carousel-slide active">
+        <img src="1080p_flyer-triple-camara.jpg" alt="Dash Cam Triple Cámara 1080P" onclick="openModal(1)" style="cursor:pointer;">
+      </div>
+      <div class="carousel-slide">
+        <img src="flyer-triple-camara-4k.jpg" alt="DashCam Triple 4K" onclick="openModal(2)" style="cursor:pointer;">
+      </div>
+      <div class="carousel-slide">
+        <img src="flyer-n3-pro.jpg" alt="DDPAI N3 Pro" onclick="openModal(9)" style="cursor:pointer;">
+      </div>
+      <div class="carousel-slide">
+        <img src="flyer-z50-pro.jpg" alt="DDPAI Z50 Pro" onclick="openModal(10)" style="cursor:pointer;">
+      </div>
+    </div>
+    <button class="carousel-nav" id="nextBtn" onclick="carouselNext()">❯</button>
+  </div>
+  <div class="prod-grid" id="prod-grid" style="display:none;">
     <!-- 1. Dash Cam Triple 1080P — EN STOCK -->
     <div class="prod-card" data-cat="entry" data-avail="stock" onclick="location.href='/productos/dashcam-1080p/'" style="cursor:pointer;">
       <div class="prod-img">
@@ -1091,8 +1155,9 @@ function closeModal(){document.getElementById('modal').style.display='none';docu
 function handleOverlayClick(e){if(e.target===document.getElementById('modal'))closeModal();}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});function showRS(id,btn){document.querySelectorAll('.rs-tab').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.rs-content').forEach(c=>c.classList.remove('active'));btn.classList.add('active');document.getElementById('rs-'+id).classList.add('active');}
 function fp(cat,btn){document.querySelectorAll('.filt').forEach(b=>b.classList.remove('active'));btn.classList.add('active');document.querySelectorAll('.prod-card').forEach(c=>{const show=cat==='all'?true:cat==='stock'?c.dataset.avail==='stock':c.dataset.cat===cat;c.style.display=show?'':'none';});}
+let carouselIdx=0;const carouselTotal=4;function carouselNext(){carouselIdx=(carouselIdx+1)%carouselTotal;updateCarousel();}function carouselPrev(){carouselIdx=(carouselIdx-1+carouselTotal)%carouselTotal;updateCarousel();}function updateCarousel(){document.querySelectorAll('.carousel-slide').forEach((s,i)=>s.classList.toggle('active',i===carouselIdx));updateCarouselBtns();}function updateCarouselBtns(){document.getElementById('prevBtn').disabled=carouselIdx===0;document.getElementById('nextBtn').disabled=carouselIdx===carouselTotal-1;}
 function toggleFaq(el){el.classList.toggle('open');}
 function toggleMenu(){const m=document.getElementById('mob-menu');m.style.display=m.style.display==='flex'?'none':'flex';}
-window.addEventListener('scroll',()=>{document.getElementById('mob-menu').style.display='none';});</script>
+window.addEventListener('scroll',()=>{document.getElementById('mob-menu').style.display='none';});document.addEventListener('DOMContentLoaded',updateCarouselBtns);</script>
 </body>
 </html>
