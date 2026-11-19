@@ -8,15 +8,21 @@
 <link rel="canonical" href="https://dashcamargentina.com/blog/">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-:root{--pr:#060C14;--ac:#1A6EE8;--tx:#fff;--txd:#A8B8D0;--bd:#1A2535}
-body{font-family:sans-serif;background:var(--pr);color:var(--tx)}
-nav{position:fixed;top:0;width:100%;background:rgba(6,12,20,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--bd);padding:16px 5%;display:flex;justify-content:space-between;align-items:center;z-index:200}
-.logo{color:#fff;text-decoration:none;font-weight:700;font-size:16px;display:flex;align-items:center;gap:10px}
-.nav-links{display:flex;gap:30px;list-style:none}
-.nav-links a{color:var(--txd);text-decoration:none;font-size:14px;transition:color .2s}
-.nav-links a:hover{color:var(--ac)}
-.nav-cta{background:var(--ac);color:#fff!important;padding:8px 16px;border-radius:6px;font-weight:600;transition:background .2s}
-.nav-cta:hover{background:#4D9FFF}
+:root{--pr:#060C14;--ac:#1A6EE8;--tx:#fff;--txd:#A8B8D0;--bd:#1A2535;--acl:#4D9FFF;--rs:6px}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--pr);color:var(--tx)}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;line-height:normal;display:flex;align-items:center;justify-content:space-between;padding:0 5%;height:64px;background:rgba(6,12,20,.85);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.06);transition:background .3s}
+.logo{text-decoration:none;display:flex;align-items:center}
+.nl{display:flex;gap:28px;list-style:none}
+.nl a{color:var(--txd);text-decoration:none;font-size:13px;font-weight:500;letter-spacing:.3px;transition:color .2s}
+.nl a:hover{color:#fff}
+.nav-cta{background:var(--ac);color:#fff!important;padding:8px 18px;border-radius:var(--rs);font-weight:600!important;font-size:13px!important;transition:background .2s!important}
+.nav-cta:hover{background:var(--acl)!important}
+.ham{display:none;flex-direction:column;gap:5px;cursor:pointer}
+.ham span{width:22px;height:1.5px;background:var(--txd);border-radius:2px;transition:all .3s}
+.mob-menu{display:none;line-height:normal;flex-direction:column;position:fixed;top:64px;left:0;right:0;background:rgba(6,12,20,.97);backdrop-filter:blur(16px);padding:20px 5% 28px;gap:0;border-bottom:1px solid var(--bd);z-index:199}
+.mob-menu a{color:var(--txd);text-decoration:none;font-size:15px;padding:14px 0;border-bottom:1px solid var(--bd);display:block}
+.mob-menu a:last-child{border-bottom:none;color:#25D366;font-weight:700;margin-top:8px}
+@media(max-width:640px){.nl{display:none}.ham{display:flex}}
 .container{max-width:1000px;margin:0 auto;padding:100px 5% 50px}
 h1{font-size:48px;margin-bottom:20px}
 .subtitle{font-size:18px;color:var(--txd);margin-bottom:50px}
@@ -34,14 +40,35 @@ footer{text-align:center;padding:40px 5%;border-top:1px solid var(--bd);color:va
 </head>
 <body>
 <nav>
-  <a href="/" class="logo">📷 DashCam Argentina</a>
-  <ul class="nav-links">
-    <li><a href="/">Inicio</a></li>
+  <a class="logo" href="/">
+    <svg width="148" height="36" viewBox="0 0 160 40" fill="none">
+      <rect x="0" y="6" width="36" height="26" rx="5" fill="#1A6EE8"/>
+      <rect x="36" y="11" width="7" height="16" rx="2" fill="#1A6EE8"/>
+      <circle cx="18" cy="19" r="7" fill="#060C14" stroke="#fff" stroke-width="1.5"/>
+      <circle cx="18" cy="19" r="3.5" fill="#060C14"/>
+      <circle cx="18" cy="19" r="1.5" fill="#1A6EE8"/>
+      <circle cx="30" cy="9" r="4" fill="#E02B2B"/>
+      <circle cx="30" cy="9" r="2" fill="#fff"/>
+      <text x="50" y="17" font-family="-apple-system,sans-serif" font-size="13" font-weight="700" fill="#ffffff" letter-spacing=".3">DASHCAM</text>
+      <text x="50" y="31" font-family="-apple-system,sans-serif" font-size="11" font-weight="400" fill="#7B9BC8" letter-spacing="2">ARGENTINA</text>
+    </svg>
+  </a>
+  <ul class="nl">
     <li><a href="/#productos">Productos</a></li>
     <li><a href="/blog/">Blog</a></li>
-    <li><a href="https://wa.me/541125184369" class="nav-cta" target="_blank" rel="noopener">WhatsApp</a></li>
+    <li><a href="/#faq">FAQ</a></li>
+    <li><a href="https://wa.me/541125184369" target="_blank" rel="noopener" class="nav-cta">Consultar →</a></li>
   </ul>
+  <div class="ham" id="ham" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
 </nav>
+<div class="mob-menu" id="mob-menu">
+  <a href="/#productos" onclick="toggleMenu()">Productos</a>
+  <a href="/blog/" onclick="toggleMenu()">Blog</a>
+  <a href="/#faq" onclick="toggleMenu()">FAQ</a>
+  <a href="https://wa.me/541125184369" target="_blank" rel="noopener" onclick="toggleMenu()">Consultar por WhatsApp →</a>
+</div>
 
 <div class="container">
   <h1>Blog Dashcam Argentina</h1>
@@ -49,7 +76,7 @@ footer{text-align:center;padding:40px 5%;border-top:1px solid var(--bd);color:va
 
   <div class="blog-grid">
     <a href="ddpai-revendedor-oficial.html" class="blog-card">
-      <div class="blog-card-img"><img src="../01-revendedor-ddpai.webp" alt="Revendedor Oficial DDPAI"></div>
+      <div class="blog-card-img"><img src="../01-revendedor-ddpai.webp?v=2" alt="Revendedor Oficial DDPAI" width="1774" height="887" decoding="async"></div>
       <div class="blog-card-body">
         <div class="blog-card-cat">Empresa</div>
         <div class="blog-card-title">Revendedor Oficial DDPAI</div>
@@ -59,7 +86,7 @@ footer{text-align:center;padding:40px 5%;border-top:1px solid var(--bd);color:va
     </a>
 
     <a href="n3-pro-gps-review.html" class="blog-card">
-      <div class="blog-card-img"><img src="../02-n3-pro.webp" alt="N3 Pro GPS"></div>
+      <div class="blog-card-img"><img src="../02-n3-pro.webp?v=2" alt="N3 Pro GPS" width="1774" height="887" decoding="async"></div>
       <div class="blog-card-body">
         <div class="blog-card-cat">Reseña</div>
         <div class="blog-card-title">N3 Pro GPS: Análisis Completo</div>
@@ -69,7 +96,7 @@ footer{text-align:center;padding:40px 5%;border-top:1px solid var(--bd);color:va
     </a>
 
     <a href="z50-pro-dual-4k.html" class="blog-card">
-      <div class="blog-card-img"><img src="../03-z50-pro.webp" alt="Z50 Pro Dual 4K"></div>
+      <div class="blog-card-img"><img src="../03-z50-pro.webp?v=2" alt="Z50 Pro Dual 4K" width="1774" height="887" decoding="async"></div>
       <div class="blog-card-body">
         <div class="blog-card-cat">Producto</div>
         <div class="blog-card-title">Z50 Pro: 4K y NightVIS 2.0</div>
@@ -79,7 +106,7 @@ footer{text-align:center;padding:40px 5%;border-top:1px solid var(--bd);color:va
     </a>
 
     <a href="n2-dual-vs-n3-pro.html" class="blog-card">
-      <div class="blog-card-img"><img src="../04-n2-dual-vs-n3-pro.webp" alt="N2 Dual vs N3 Pro"></div>
+      <div class="blog-card-img"><img src="../04-n2-dual-vs-n3-pro.webp?v=2" alt="N2 Dual vs N3 Pro" width="1774" height="887" loading="lazy" decoding="async"></div>
       <div class="blog-card-body">
         <div class="blog-card-cat">Comparativa</div>
         <div class="blog-card-title">N2 Dual vs N3 Pro</div>
@@ -89,7 +116,7 @@ footer{text-align:center;padding:40px 5%;border-top:1px solid var(--bd);color:va
     </a>
 
     <a href="z50-pro-review.html" class="blog-card">
-      <div class="blog-card-img"><img src="../03-z50-pro.webp" alt="Z50 Pro Review 4K"></div>
+      <div class="blog-card-img"><img src="../03-z50-pro.webp?v=2" alt="Z50 Pro Review 4K" width="1774" height="887" loading="lazy" decoding="async"></div>
       <div class="blog-card-body">
         <div class="blog-card-cat">Producto</div>
         <div class="blog-card-title">Z50 Pro: 4K + 4G + NightVIS 2.0</div>
@@ -99,7 +126,7 @@ footer{text-align:center;padding:40px 5%;border-top:1px solid var(--bd);color:va
     </a>
 
     <a href="vision-nocturna-ddpai.html" class="blog-card">
-      <div class="blog-card-img"><img src="../05-nightvis-2.webp" alt="Visión Nocturna NightVIS 2.0"></div>
+      <div class="blog-card-img"><img src="../05-nightvis-2.webp?v=2" alt="Visión Nocturna NightVIS 2.0" width="1774" height="887" loading="lazy" decoding="async"></div>
       <div class="blog-card-body">
         <div class="blog-card-cat">Tecnología</div>
         <div class="blog-card-title">Visión Nocturna: NightVIS 2.0</div>
@@ -113,5 +140,9 @@ footer{text-align:center;padding:40px 5%;border-top:1px solid var(--bd);color:va
 <footer>
   <p>&copy; 2026 Dashcam Argentina • Revendedor Oficial DDPAI</p>
 </footer>
+<script>
+function toggleMenu(){const m=document.getElementById('mob-menu');m.style.display=m.style.display==='flex'?'none':'flex';}
+window.addEventListener('scroll',()=>{document.getElementById('mob-menu').style.display='none';});
+</script>
 </body>
 </html>

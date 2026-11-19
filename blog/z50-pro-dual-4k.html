@@ -7,9 +7,21 @@
 <meta name="description" content="Z50 Pro Dual: La dashcam 4K más avanzada. Pantalla 3\", NightVIS 2.0 con IA, ADAS 2.0, WiFi 6 y conectividad 4G. El tope de línea de DDPAI.">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-:root{--pr:#060C14;--ac:#1A6EE8;--tx:#fff;--txd:#A8B8D0;--bd:#1A2535}
-body{font-family:sans-serif;background:var(--pr);color:var(--tx);line-height:1.6}
-nav{position:fixed;top:0;width:100%;background:rgba(6,12,20,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--bd);padding:16px 5%;display:flex;align-items:center;justify-content:space-between;z-index:200}
+:root{--pr:#060C14;--ac:#1A6EE8;--tx:#fff;--txd:#A8B8D0;--bd:#1A2535;--acl:#4D9FFF;--rs:6px}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--pr);color:var(--tx);line-height:1.6}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;line-height:normal;display:flex;align-items:center;justify-content:space-between;padding:0 5%;height:64px;background:rgba(6,12,20,.85);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.06);transition:background .3s}
+.logo{text-decoration:none;display:flex;align-items:center}
+.nl{display:flex;gap:28px;list-style:none}
+.nl a{color:var(--txd);text-decoration:none;font-size:13px;font-weight:500;letter-spacing:.3px;transition:color .2s}
+.nl a:hover{color:#fff}
+.nav-cta{background:var(--ac);color:#fff!important;padding:8px 18px;border-radius:var(--rs);font-weight:600!important;font-size:13px!important;transition:background .2s!important}
+.nav-cta:hover{background:var(--acl)!important}
+.ham{display:none;flex-direction:column;gap:5px;cursor:pointer}
+.ham span{width:22px;height:1.5px;background:var(--txd);border-radius:2px;transition:all .3s}
+.mob-menu{display:none;line-height:normal;flex-direction:column;position:fixed;top:64px;left:0;right:0;background:rgba(6,12,20,.97);backdrop-filter:blur(16px);padding:20px 5% 28px;gap:0;border-bottom:1px solid var(--bd);z-index:199}
+.mob-menu a{color:var(--txd);text-decoration:none;font-size:15px;padding:14px 0;border-bottom:1px solid var(--bd);display:block}
+.mob-menu a:last-child{border-bottom:none;color:#25D366;font-weight:700;margin-top:8px}
+@media(max-width:640px){.nl{display:none}.ham{display:flex}}
 .article{max-width:800px;margin:100px auto 50px;padding:0 5%}
 h1{font-size:42px;color:#fff;margin-bottom:20px}
 .meta{color:var(--txd);font-size:14px;margin-bottom:30px}
@@ -26,14 +38,35 @@ footer{text-align:center;padding:40px 5%;border-top:1px solid var(--bd);color:va
 </head>
 <body>
 <nav>
-  <a href="/" class="logo">📷 DashCam Argentina</a>
-  <ul class="nav-links">
-    <li><a href="/">Inicio</a></li>
+  <a class="logo" href="/">
+    <svg width="148" height="36" viewBox="0 0 160 40" fill="none">
+      <rect x="0" y="6" width="36" height="26" rx="5" fill="#1A6EE8"/>
+      <rect x="36" y="11" width="7" height="16" rx="2" fill="#1A6EE8"/>
+      <circle cx="18" cy="19" r="7" fill="#060C14" stroke="#fff" stroke-width="1.5"/>
+      <circle cx="18" cy="19" r="3.5" fill="#060C14"/>
+      <circle cx="18" cy="19" r="1.5" fill="#1A6EE8"/>
+      <circle cx="30" cy="9" r="4" fill="#E02B2B"/>
+      <circle cx="30" cy="9" r="2" fill="#fff"/>
+      <text x="50" y="17" font-family="-apple-system,sans-serif" font-size="13" font-weight="700" fill="#ffffff" letter-spacing=".3">DASHCAM</text>
+      <text x="50" y="31" font-family="-apple-system,sans-serif" font-size="11" font-weight="400" fill="#7B9BC8" letter-spacing="2">ARGENTINA</text>
+    </svg>
+  </a>
+  <ul class="nl">
     <li><a href="/#productos">Productos</a></li>
     <li><a href="/blog/">Blog</a></li>
-    <li><a href="https://wa.me/541125184369" class="nav-cta" target="_blank" rel="noopener">WhatsApp</a></li>
+    <li><a href="/#faq">FAQ</a></li>
+    <li><a href="https://wa.me/541125184369" target="_blank" rel="noopener" class="nav-cta">Consultar →</a></li>
   </ul>
+  <div class="ham" id="ham" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
 </nav>
+<div class="mob-menu" id="mob-menu">
+  <a href="/#productos" onclick="toggleMenu()">Productos</a>
+  <a href="/blog/" onclick="toggleMenu()">Blog</a>
+  <a href="/#faq" onclick="toggleMenu()">FAQ</a>
+  <a href="https://wa.me/541125184369" target="_blank" rel="noopener" onclick="toggleMenu()">Consultar por WhatsApp →</a>
+</div>
 
 <article class="article">
   <h1>Z50 Pro Dual: La Dashcam 4K Más Avanzada</h1>
@@ -184,5 +217,9 @@ footer{text-align:center;padding:40px 5%;border-top:1px solid var(--bd);color:va
 <footer>
   <p>&copy; 2026 Dashcam Argentina</p>
 </footer>
+<script>
+function toggleMenu(){const m=document.getElementById('mob-menu');m.style.display=m.style.display==='flex'?'none':'flex';}
+window.addEventListener('scroll',()=>{document.getElementById('mob-menu').style.display='none';});
+</script>
 </body>
 </html>
