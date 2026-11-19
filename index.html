@@ -449,6 +449,34 @@ nav{
 .cta-banner h2{font-size:clamp(32px,5vw,56px);font-weight:800;letter-spacing:-1.5px;margin-bottom:16px}
 .cta-banner p{font-size:17px;color:var(--txd);margin-bottom:40px}
 
+/* ── TESTIMONIOS ───────────────────────── */
+.testimonios{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:24px;max-width:1100px;margin:0 auto;
+}
+.testimonio{
+  background:#0D1620;border:1px solid var(--bd);border-radius:12px;
+  padding:28px;text-align:center;transition:transform .3s,background .3s;
+}
+.testimonio:hover{transform:translateY(-4px);background:#0F1828}
+.testimonio-stars{
+  font-size:14px;color:#FCD34D;letter-spacing:4px;margin-bottom:14px;
+  display:flex;justify-content:center;gap:2px;
+}
+.testimonio-text{
+  font-size:14px;color:var(--txd);line-height:1.8;margin-bottom:18px;
+  font-style:italic;
+}
+.testimonio-autor{
+  display:flex;align-items:center;justify-content:center;gap:12px;
+}
+.testimonio-avatar{
+  width:44px;height:44px;border-radius:50%;object-fit:cover;
+}
+.testimonio-info{text-align:left;font-size:13px}
+.testimonio-nombre{font-weight:600;color:#fff;margin-bottom:2px}
+.testimonio-rol{color:var(--txd);font-size:12px}
+
 /* ── FOOTER ────────────────────────────── */
 footer{
   background:#03070D;
@@ -1029,6 +1057,75 @@ src="https://www.facebook.com/tr?id=2547617182374031&ev=PageView&noscript=1"
   <p>Contanos tu caso por WhatsApp y te recomendamos la cámara ideal en minutos.</p>
   <a href="https://wa.me/541125184369?text=Hola,%20necesito%20ayuda%20para%20elegir%20una%20dashcam" class="btn-primary" target="_blank" rel="noopener">Consultar gratis →</a>
 </div>
+
+<!-- TESTIMONIOS -->
+<section class="section" style="background:#060C14;padding:60px 5%">
+  <div style="max-width:700px;margin:0 auto;text-align:center;margin-bottom:48px">
+    <span class="eyebrow">Lo que dicen nuestros clientes</span>
+    <h2 class="section-title">Testimonios de Usuarios</h2>
+  </div>
+  <div class="testimonios">
+    <div class="testimonio">
+      <div class="testimonio-stars">★★★★★</div>
+      <p class="testimonio-text">"Excelente calidad de imagen, especialmente de noche. Uso el N3 Pro para Uber y la visión nocturna es increíble. Se leen las patentes perfectamente."</p>
+      <div class="testimonio-autor">
+        <img class="testimonio-avatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%231A6EE8' width='100' height='100'/%3E%3Ctext x='50' y='50' font-size='50' fill='white' text-anchor='middle' dy='.3em'%3ECJ%3C/text%3E%3C/svg%3E" alt="Carlos J">
+        <div class="testimonio-info">
+          <div class="testimonio-nombre">Carlos J.</div>
+          <div class="testimonio-rol">Conductor Uber</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonio">
+      <div class="testimonio-stars">★★★★★</div>
+      <p class="testimonio-text">"Muy fácil de instalar, tardé 15 minutos. La garantía y el soporte están de 10. Ya recomendé a todos mis compañeros de Cabify."</p>
+      <div class="testimonio-autor">
+        <img class="testimonio-avatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%2309C155' width='100' height='100'/%3E%3Ctext x='50' y='50' font-size='45' fill='white' text-anchor='middle' dy='.3em'%3EMR%3C/text%3E%3C/svg%3E" alt="Martina R">
+        <div class="testimonio-info">
+          <div class="testimonio-nombre">Martina R.</div>
+          <div class="testimonio-rol">Conductora Cabify</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonio">
+      <div class="testimonio-stars">★★★★★</div>
+      <p class="testimonio-text">"El Z50 Pro vale cada peso. WiFi 6, pantalla grande, y el ADAS me alertó cuando un auto se me cerraba. Seguridad total."</p>
+      <div class="testimonio-autor">
+        <img class="testimonio-avatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%23F97316' width='100' height='100'/%3E%3Ctext x='50' y='50' font-size='50' fill='white' text-anchor='middle' dy='.3em'%3EAV%3C/text%3E%3C/svg%3E" alt="Alejandro V">
+        <div class="testimonio-info">
+          <div class="testimonio-nombre">Alejandro V.</div>
+          <div class="testimonio-rol">Conductor Profesional</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonio">
+      <div class="testimonio-stars">★★★★★</div>
+      <p class="testimonio-text">"Compré para protegerme con la aseguradora. Los videos quedaron claros en un accidente. Recomiendo 100% a cualquiera."</p>
+      <div class="testimonio-autor">
+        <img class="testimonio-avatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%238B5CF6' width='100' height='100'/%3E%3Ctext x='50' y='50' font-size='45' fill='white' text-anchor='middle' dy='.3em'%3ENL%3C/text%3E%3C/svg%3E" alt="Natalia L">
+        <div class="testimonio-info">
+          <div class="testimonio-nombre">Natalia L.</div>
+          <div class="testimonio-rol">Conductora Particular</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonio">
+      <div class="testimonio-stars">★★★★★</div>
+      <p class="testimonio-text">"DiDi driver acá. La Triple 1080P me costó menos y grabación en 3 canales. Perfecto para lo que necesitaba. Muy recomendado."</p>
+      <div class="testimonio-autor">
+        <img class="testimonio-avatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%2306B6D4' width='100' height='100'/%3E%3Ctext x='50' y='50' font-size='50' fill='white' text-anchor='middle' dy='.3em'%3EPA%3C/text%3E%3C/svg%3E" alt="Pedro A">
+        <div class="testimonio-info">
+          <div class="testimonio-nombre">Pedro A.</div>
+          <div class="testimonio-rol">Conductor DiDi</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- FAQ -->
 <section class="section section-darker" id="faq" style="background:#03070D">
