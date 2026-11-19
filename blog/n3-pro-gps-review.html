@@ -9,10 +9,13 @@
 *{box-sizing:border-box;margin:0;padding:0}
 :root{--pr:#060C14;--ac:#1A6EE8;--tx:#fff;--txd:#A8B8D0;--bd:#1A2535}
 body{font-family:sans-serif;background:var(--pr);color:var(--tx);line-height:1.6}
-nav{position:fixed;top:0;width:100%;background:rgba(6,12,20,.85);padding:16px 5%;display:flex;justify-content:space-between;z-index:200}
-.logo{color:#fff;text-decoration:none;font-weight:700}
-.nav-links{display:flex;gap:30px;list-style:none}
-.nav-links a{color:var(--txd);text-decoration:none}
+nav{position:fixed;top:0;width:100%;background:rgba(6,12,20,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--bd);padding:16px 5%;display:flex;justify-content:space-between;align-items:center;z-index:200}
+.logo{color:#fff;text-decoration:none;font-weight:700;font-size:16px;display:flex;align-items:center;gap:10px}
+.nav-links{display:flex;gap:30px;list-style:none}.nav-links a:hover{color:var(--ac)}
+.nav-links a{color:var(--txd);text-decoration:none;font-size:14px;transition:color .2s}
+.nav-links a:hover{color:var(--ac)}
+.nav-cta{background:var(--ac);color:#fff!important;padding:8px 16px;border-radius:6px;font-weight:600;transition:background .2s}
+.nav-cta:hover{background:#4D9FFF}
 .article{max-width:800px;margin:100px auto 50px;padding:0 5%}
 h1{font-size:42px;margin-bottom:20px;color:#fff}
 .meta{color:var(--txd);font-size:14px;margin-bottom:30px}
@@ -29,10 +32,12 @@ footer{text-align:center;padding:40px 5%;border-top:1px solid var(--bd);color:va
 </head>
 <body>
 <nav>
-  <a href="/" class="logo">🎥 DashCam Argentina</a>
+  <a href="/" class="logo">📷 DashCam Argentina</a>
   <ul class="nav-links">
     <li><a href="/">Inicio</a></li>
+    <li><a href="/#productos">Productos</a></li>
     <li><a href="/blog/">Blog</a></li>
+    <li><a href="https://wa.me/541125184369" class="nav-cta" target="_blank" rel="noopener">WhatsApp</a></li>
   </ul>
 </nav>
 
